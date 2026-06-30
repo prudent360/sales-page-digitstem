@@ -12,7 +12,6 @@
     ═══════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      /* ─ Palette ─ */
       --bg-deep:    #060B18;
       --bg-base:    #0A0E1A;
       --bg-card:    #0F1424;
@@ -34,25 +33,20 @@
       --text-soft:  #CBD5E1;
       --text-muted: #64748B;
       --text-dim:   #475569;
-      /* ─ Gradients ─ */
       --grad-emerald:  linear-gradient(135deg, #10B981 0%, #059669 100%);
       --grad-gold:     linear-gradient(135deg, #F7C948 0%, #D4A017 100%);
       --grad-hero:     radial-gradient(ellipse 100% 70% at 50% -5%, rgba(16,185,129,0.10) 0%, rgba(6,11,24,0) 70%);
       --grad-section:  radial-gradient(ellipse 80% 40% at 50% 0%, rgba(16,185,129,0.04) 0%, transparent 70%);
       --grad-glass:    linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-      /* ─ Glass ─ */
       --glass-bg:      rgba(15,20,36,0.7);
       --glass-border:  rgba(255,255,255,0.06);
       --glass-blur:    blur(20px);
-      /* ─ Shadows ─ */
       --shadow-lg: 0 20px 60px rgba(0,0,0,0.4);
       --shadow-glow: 0 0 40px rgba(16,185,129,0.15);
-      /* ─ Radius ─ */
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
       --radius-xl: 28px;
-      /* ─ Timing ─ */
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
@@ -66,7 +60,6 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
-    /* ── Noise texture overlay ── */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 9999;
@@ -79,9 +72,16 @@
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
 
-    /* ═══════════════════════════════════════════
-       UTILITIES
-    ═══════════════════════════════════════════ */
+    /* ═══ PROGRESS BAR ═══ */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; z-index: 9998;
+      height: 3px; width: 0%;
+      background: var(--grad-emerald);
+      box-shadow: 0 0 12px rgba(16,185,129,0.5);
+      transition: width 0.1s linear;
+    }
+
+    /* ═══ UTILITIES ═══ */
     .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
     .container-wide { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
     .green { color: var(--emerald); }
@@ -91,41 +91,36 @@
 
     /* ── Scroll reveal ── */
     .reveal {
-      opacity: 0;
-      transform: translateY(32px);
+      opacity: 0; transform: translateY(32px);
       transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-left {
-      opacity: 0;
-      transform: translateX(-40px);
+      opacity: 0; transform: translateX(-40px);
       transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
     }
     .reveal-left.visible { opacity: 1; transform: translateX(0); }
     .reveal-right {
-      opacity: 0;
-      transform: translateX(40px);
+      opacity: 0; transform: translateX(40px);
       transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
     }
     .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .reveal-scale {
+      opacity: 0; transform: scale(0.9);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
 
     /* ── Tags ── */
     .tag {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
-      color: var(--emerald);
-      background: var(--emerald-glow);
-      border: 1px solid rgba(16,185,129,0.2);
-      border-radius: 100px;
-      padding: 6px 16px;
-      margin-bottom: 20px;
+      color: var(--emerald); background: var(--emerald-glow);
+      border: 1px solid rgba(16,185,129,0.2); border-radius: 100px;
+      padding: 6px 16px; margin-bottom: 20px;
     }
     .tag.gold-tag {
-      color: var(--gold);
-      background: var(--gold-glow);
+      color: var(--gold); background: var(--gold-glow);
       border-color: rgba(247,201,72,0.25);
     }
 
@@ -133,121 +128,107 @@
     .section-head { text-align: center; margin-bottom: 56px; }
     .section-head h2 {
       font-family: 'Outfit', 'Inter', sans-serif;
-      font-size: clamp(28px, 4vw, 48px);
-      font-weight: 900;
-      letter-spacing: -1px;
-      line-height: 1.12;
-      margin-bottom: 16px;
+      font-size: clamp(28px, 4vw, 48px); font-weight: 900;
+      letter-spacing: -1px; line-height: 1.12; margin-bottom: 16px;
     }
     .section-head p {
-      font-size: clamp(15px, 1.5vw, 19px);
-      color: var(--text-soft);
-      max-width: 580px;
-      margin: 0 auto;
-      line-height: 1.65;
+      font-size: clamp(15px, 1.5vw, 19px); color: var(--text-soft);
+      max-width: 580px; margin: 0 auto; line-height: 1.65;
     }
     .divider {
       width: 56px; height: 4px;
-      background: var(--grad-emerald);
-      border-radius: 4px;
+      background: var(--grad-emerald); border-radius: 4px;
       margin: 18px auto;
     }
-
-    /* ── Sections ── */
     section { padding: 88px 0; position: relative; }
 
-    /* ═══════════════════════════════════════════
-       ANNOUNCEMENT BAR
-    ═══════════════════════════════════════════ */
+    /* ═══ ANNOUNCEMENT BAR ═══ */
     .ann-bar {
-      background: var(--grad-emerald);
-      color: #000;
-      text-align: center;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 11px 20px;
-      letter-spacing: 0.3px;
-      position: relative;
-      overflow: hidden;
+      background: var(--grad-emerald); color: #000;
+      text-align: center; font-size: 13px; font-weight: 700;
+      padding: 11px 20px; letter-spacing: 0.3px;
+      position: relative; overflow: hidden;
     }
     .ann-bar::before {
-      content: '';
-      position: absolute; inset: 0;
+      content: ''; position: absolute; inset: 0;
       background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
       animation: ann-shimmer 3s ease-in-out infinite;
     }
-    @keyframes ann-shimmer {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
+    @keyframes ann-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
     .ann-bar span { opacity: 0.5; margin: 0 8px; }
     .ann-bar-text { position: relative; z-index: 1; }
+    .ann-countdown { font-weight: 900; color: #000; margin-left: 4px; }
 
-    /* ═══════════════════════════════════════════
-       NAV
-    ═══════════════════════════════════════════ */
+    /* ═══ NAV ═══ */
     nav {
-      background: rgba(6,11,24,0.85);
-      border-bottom: 1px solid var(--glass-border);
-      padding: 14px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(6,11,24,0.85); border-bottom: 1px solid var(--glass-border);
+      padding: 14px 28px; display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     }
     .nav-logo {
-      font-family: 'Outfit', sans-serif;
-      font-size: 16px; font-weight: 900;
-      color: var(--emerald);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+      font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 900;
+      color: var(--emerald); letter-spacing: 1.5px; text-transform: uppercase;
+    }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-counter {
+      font-size: 12px; font-weight: 700; color: var(--gold);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .nav-counter .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--emerald);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
     }
     .nav-cta {
-      background: var(--emerald);
-      color: #000;
-      font-weight: 800;
-      font-size: 13px;
-      padding: 10px 24px;
-      border-radius: 100px;
-      letter-spacing: 0.2px;
+      background: var(--emerald); color: #000; font-weight: 800; font-size: 13px;
+      padding: 10px 24px; border-radius: 100px; letter-spacing: 0.2px;
       transition: all 0.3s var(--ease-out);
       box-shadow: 0 2px 12px rgba(16,185,129,0.2);
     }
     .nav-cta:hover {
-      background: var(--emerald-bright);
-      transform: translateY(-1px);
+      background: var(--emerald-bright); transform: translateY(-1px);
       box-shadow: 0 6px 24px rgba(16,185,129,0.35);
     }
 
-    /* ═══════════════════════════════════════════
-       HERO
-    ═══════════════════════════════════════════ */
+    /* ═══ HERO ═══ */
     #hero {
       padding: 100px 0 88px;
-      background: var(--grad-hero);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+      background: var(--bg-deep);
+      text-align: center; position: relative; overflow: hidden;
     }
-    /* Decorative orb */
+    /* Gradient mesh background */
     #hero::before {
-      content: '';
-      position: absolute;
-      width: 600px; height: 600px;
-      top: -200px; left: 50%;
-      transform: translateX(-50%);
-      background: radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%);
-      border-radius: 50%;
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 20%, rgba(16,185,129,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 80% 30%, rgba(52,211,153,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 40% at 50% 80%, rgba(247,201,72,0.05) 0%, transparent 60%);
+      animation: mesh-move 12s ease-in-out infinite alternate;
       pointer-events: none;
+    }
+    @keyframes mesh-move {
+      0% { transform: scale(1) rotate(0deg); opacity: 1; }
+      50% { transform: scale(1.1) rotate(2deg); opacity: 0.7; }
+      100% { transform: scale(1.05) rotate(-1deg); opacity: 0.9; }
+    }
+    #hero::after {
+      content: ''; position: absolute;
+      width: 500px; height: 500px; top: -150px; left: 50%; transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%);
+      border-radius: 50%; pointer-events: none;
       animation: hero-pulse 6s ease-in-out infinite;
     }
     @keyframes hero-pulse {
       0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
-      50% { opacity: 0.6; transform: translateX(-50%) scale(1.15); }
+      50% { opacity: 0.5; transform: translateX(-50%) scale(1.2); }
+    }
+    /* Particle canvas behind hero */
+    #particles-canvas {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
     }
     #hero .pre-head {
       font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
@@ -255,252 +236,174 @@
       display: flex; align-items: center; justify-content: center; gap: 12px;
       position: relative; z-index: 1;
     }
-    #hero .pre-head::before,
-    #hero .pre-head::after {
+    #hero .pre-head::before, #hero .pre-head::after {
       content: ''; flex: 0 0 48px; height: 1px;
       background: linear-gradient(90deg, transparent, rgba(16,185,129,0.5));
     }
-    #hero .pre-head::after {
-      background: linear-gradient(90deg, rgba(16,185,129,0.5), transparent);
-    }
+    #hero .pre-head::after { background: linear-gradient(90deg, rgba(16,185,129,0.5), transparent); }
     #hero h1 {
       font-family: 'Outfit', 'Inter', sans-serif;
-      font-size: clamp(36px, 6vw, 72px);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -2px;
-      margin-bottom: 28px;
-      max-width: 840px;
-      margin-left: auto;
-      margin-right: auto;
+      font-size: clamp(36px, 6vw, 72px); font-weight: 900;
+      line-height: 1.05; letter-spacing: -2px; margin-bottom: 28px;
+      max-width: 840px; margin-left: auto; margin-right: auto;
       position: relative; z-index: 1;
     }
     #hero h1 em {
       background: linear-gradient(135deg, var(--emerald-bright), var(--gold));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     #hero .hero-sub {
-      font-size: clamp(16px, 2vw, 21px);
-      color: var(--text-soft);
-      max-width: 620px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
+      font-size: clamp(16px, 2vw, 21px); color: var(--text-soft);
+      max-width: 620px; margin: 0 auto 40px; line-height: 1.7;
       position: relative; z-index: 1;
     }
 
-    /* ── Hero CTA ── */
+    /* Hero layout with mockup */
+    .hero-content { position: relative; z-index: 1; }
+    .hero-bottom {
+      display: flex; align-items: center; justify-content: center; gap: 48px;
+      margin-top: 48px; position: relative; z-index: 1;
+    }
+    .hero-mockup {
+      flex-shrink: 0; max-width: 280px;
+      animation: float 6s ease-in-out infinite;
+      filter: drop-shadow(0 20px 60px rgba(16,185,129,0.2));
+    }
+    .hero-mockup img { border-radius: 24px; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-16px); }
+    }
+    .hero-cta-side {
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+    }
+
+    /* Hero CTA */
     .hero-cta-group {
       display: flex; flex-direction: column; align-items: center; gap: 16px;
       position: relative; z-index: 1;
     }
     .btn-primary {
-      display: inline-block;
-      background: var(--emerald);
-      color: #000;
-      font-weight: 900;
-      font-size: 18px;
-      padding: 18px 52px;
-      border-radius: 100px;
-      letter-spacing: 0.2px;
+      display: inline-block; background: var(--emerald); color: #000;
+      font-weight: 900; font-size: 18px; padding: 18px 52px;
+      border-radius: 100px; letter-spacing: 0.2px;
       transition: all 0.3s var(--ease-out);
-      border: none; cursor: pointer;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+      border: none; cursor: pointer; text-align: center;
+      position: relative; overflow: hidden;
       box-shadow: 0 4px 24px rgba(16,185,129,0.25);
     }
     .btn-primary::before {
-      content: '';
-      position: absolute; inset: 0;
+      content: ''; position: absolute; inset: 0;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-      transform: translateX(-100%);
-      transition: none;
+      transform: translateX(-100%); transition: none;
     }
     .btn-primary:hover {
-      background: var(--emerald-bright);
-      transform: translateY(-2px);
+      background: var(--emerald-bright); transform: translateY(-2px);
       box-shadow: 0 8px 40px rgba(16,185,129,0.4);
     }
-    .btn-primary:hover::before {
-      animation: btn-shimmer 0.6s ease-out;
-    }
-    @keyframes btn-shimmer {
-      100% { transform: translateX(100%); }
-    }
+    .btn-primary:hover::before { animation: btn-shimmer 0.6s ease-out; }
+    @keyframes btn-shimmer { 100% { transform: translateX(100%); } }
     .btn-ghost {
-      display: inline-block;
-      background: transparent;
-      color: var(--text-muted);
-      font-size: 13px;
-      font-weight: 600;
-      transition: color 0.2s;
+      display: inline-block; background: transparent; color: var(--text-muted);
+      font-size: 13px; font-weight: 600; transition: color 0.2s;
     }
     .btn-ghost:hover { color: var(--text); }
 
-    /* ── Hero floating badges ── */
+    /* Hero badges */
     .hero-badges {
-      margin-top: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      position: relative; z-index: 1;
+      margin-top: 36px; display: flex; align-items: center; justify-content: center;
+      gap: 14px; flex-wrap: wrap; position: relative; z-index: 1;
     }
     .hero-badge {
       display: flex; align-items: center; gap: 7px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      border-radius: 100px;
-      padding: 8px 18px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-soft);
-      transition: all 0.3s;
+      background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border); border-radius: 100px;
+      padding: 8px 18px; font-size: 13px; font-weight: 600;
+      color: var(--text-soft); transition: all 0.3s;
     }
-    .hero-badge:hover {
-      border-color: rgba(16,185,129,0.3);
-      transform: translateY(-2px);
-    }
+    .hero-badge:hover { border-color: rgba(16,185,129,0.3); transform: translateY(-2px); }
     .hero-badge .badge-icon { font-size: 15px; }
 
-    /* ═══════════════════════════════════════════
-       PAIN SECTION
-    ═══════════════════════════════════════════ */
+    /* ═══ PAIN SECTION ═══ */
     #pain {
-      background: var(--bg-base);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      position: relative;
+      background: var(--bg-base); border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); position: relative;
     }
     #pain::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 200px;
-      background: var(--grad-section);
-      pointer-events: none;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 200px;
+      background: var(--grad-section); pointer-events: none;
     }
     #pain h2 {
       font-family: 'Outfit', 'Inter', sans-serif;
-      font-size: clamp(26px, 3.5vw, 44px);
-      font-weight: 900;
-      line-height: 1.15;
-      letter-spacing: -0.5px;
-      margin-bottom: 36px;
+      font-size: clamp(26px, 3.5vw, 44px); font-weight: 900;
+      line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 36px;
     }
-    .pain-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      margin-top: 24px;
-    }
+    .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px; }
     .pain-col { display: flex; flex-direction: column; gap: 0; }
     .pain-col-head {
       font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-      padding: 12px 20px;
-      border-radius: var(--radius-md) var(--radius-md) 0 0;
+      padding: 12px 20px; border-radius: var(--radius-md) var(--radius-md) 0 0;
     }
     .pain-col-head.problems {
-      color: var(--red);
-      background: var(--red-soft);
-      border: 1px solid rgba(248,113,113,0.15);
-      border-bottom: none;
+      color: var(--red); background: var(--red-soft);
+      border: 1px solid rgba(248,113,113,0.15); border-bottom: none;
     }
     .pain-col-head.solutions {
-      color: var(--emerald);
-      background: var(--emerald-glow);
-      border: 1px solid rgba(16,185,129,0.15);
-      border-bottom: none;
+      color: var(--emerald); background: var(--emerald-glow);
+      border: 1px solid rgba(16,185,129,0.15); border-bottom: none;
     }
     .pain-col-body {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+      background: var(--bg-card); border: 1px solid var(--border);
       border-radius: 0 0 var(--radius-md) var(--radius-md);
-      padding: 4px 0;
-      flex: 1;
+      padding: 4px 0; flex: 1;
     }
     .pain-col-body.problems-body { border-color: rgba(248,113,113,0.12); }
     .pain-col-body.solutions-body { border-color: rgba(16,185,129,0.12); }
     .pain-item {
       display: flex; align-items: flex-start; gap: 14px;
-      padding: 16px 20px;
-      font-size: clamp(14px, 1.4vw, 16px);
-      color: var(--text-soft);
-      line-height: 1.5;
+      padding: 16px 20px; font-size: clamp(14px, 1.4vw, 16px);
+      color: var(--text-soft); line-height: 1.5;
       border-bottom: 1px solid var(--border);
     }
     .pain-item:last-child { border-bottom: none; }
     .pain-icon {
-      flex-shrink: 0; margin-top: 1px;
-      width: 24px; height: 24px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px; width: 24px; height: 24px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
       font-size: 12px; font-weight: 900;
     }
-    .pain-icon.bad {
-      background: var(--red-soft);
-      color: var(--red);
-    }
-    .pain-icon.good {
-      background: var(--emerald-glow);
-      color: var(--emerald);
-    }
+    .pain-icon.bad { background: var(--red-soft); color: var(--red); }
+    .pain-icon.good { background: var(--emerald-glow); color: var(--emerald); }
 
-    /* ═══════════════════════════════════════════
-       STORY SECTION
-    ═══════════════════════════════════════════ */
-    #story {
-      background: var(--bg-deep);
-      position: relative;
-      overflow: hidden;
-    }
+    /* ═══ STORY SECTION ═══ */
+    #story { background: var(--bg-deep); position: relative; overflow: hidden; }
     #story::before {
-      content: '"';
-      position: absolute;
-      top: -40px; left: 10%;
-      font-size: 320px;
-      font-weight: 900;
-      color: rgba(16,185,129,0.03);
-      line-height: 1;
-      font-family: Georgia, serif;
-      pointer-events: none;
+      content: '"'; position: absolute; top: -40px; left: 10%;
+      font-size: 320px; font-weight: 900; color: rgba(16,185,129,0.03);
+      line-height: 1; font-family: Georgia, serif; pointer-events: none;
     }
     .story-inner { max-width: 720px; margin: 0 auto; position: relative; }
-    /* Timeline line */
     .story-inner::before {
-      content: '';
-      position: absolute;
-      top: 80px; bottom: 0; left: -40px;
+      content: ''; position: absolute; top: 80px; bottom: 0; left: -40px;
       width: 2px;
       background: linear-gradient(180deg, var(--emerald) 0%, rgba(16,185,129,0.1) 100%);
     }
     .story-body { position: relative; z-index: 1; }
     .story-body p {
-      font-size: clamp(16px, 1.8vw, 20px);
-      line-height: 1.85;
-      color: var(--text-soft);
-      margin-bottom: 24px;
+      font-size: clamp(16px, 1.8vw, 20px); line-height: 1.85;
+      color: var(--text-soft); margin-bottom: 24px;
     }
     .story-body p:last-child { margin-bottom: 0; }
     .story-body strong { color: #fff; font-weight: 700; }
     .story-body em { font-style: normal; color: var(--emerald-bright); font-weight: 700; }
     .story-pull {
-      border-left: 4px solid var(--emerald);
-      padding: 22px 28px;
-      margin: 36px 0;
+      border-left: 4px solid var(--emerald); padding: 22px 28px; margin: 36px 0;
       background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(16,185,129,0.02) 100%);
       border-radius: 0 var(--radius-md) var(--radius-md) 0;
       backdrop-filter: blur(8px);
     }
     .story-pull p {
-      font-size: clamp(18px, 2vw, 24px) !important;
-      font-weight: 700;
-      color: #fff !important;
-      line-height: 1.5 !important;
-      margin: 0 !important;
+      font-size: clamp(18px, 2vw, 24px) !important; font-weight: 700;
+      color: #fff !important; line-height: 1.5 !important; margin: 0 !important;
     }
     .story-divider {
       width: 100%; height: 1px;
@@ -508,90 +411,101 @@
       margin: 44px 0;
     }
 
-    /* ═══════════════════════════════════════════
-       PROOF BAR
-    ═══════════════════════════════════════════ */
+    /* ═══ HOW IT WORKS ═══ */
+    #how-it-works {
+      background: var(--bg-base); border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); position: relative;
+    }
+    .hiw-steps {
+      display: flex; justify-content: center; gap: 0; position: relative;
+      max-width: 900px; margin: 0 auto;
+    }
+    .hiw-step {
+      flex: 1; text-align: center; padding: 0 24px; position: relative; z-index: 1;
+    }
+    .hiw-connector {
+      position: absolute; top: 44px; left: calc(16.66% + 44px); right: calc(16.66% + 44px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--emerald), var(--gold), var(--emerald-bright));
+      z-index: 0;
+    }
+    .hiw-connector::before, .hiw-connector::after {
+      content: ''; position: absolute; top: 50%; transform: translateY(-50%);
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .hiw-connector::before { left: -5px; background: var(--emerald); }
+    .hiw-connector::after { right: -5px; background: var(--emerald-bright); }
+    .hiw-icon {
+      width: 88px; height: 88px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(16,185,129,0.03));
+      border: 2px solid rgba(16,185,129,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px; margin: 0 auto 20px;
+      transition: all 0.4s var(--ease-out);
+    }
+    .hiw-step:hover .hiw-icon {
+      transform: translateY(-6px) scale(1.05);
+      border-color: var(--emerald);
+      box-shadow: 0 12px 40px rgba(16,185,129,0.2);
+    }
+    .hiw-num {
+      font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 900;
+      color: var(--emerald); letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .hiw-title {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: clamp(16px, 1.8vw, 20px); font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .hiw-desc {
+      font-size: clamp(13px, 1.2vw, 15px); color: var(--text-muted); line-height: 1.6;
+    }
+
+    /* ═══ PROOF BAR ═══ */
     #proof-bar {
-      background: var(--bg-base);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 40px 0;
-      position: relative;
+      background: var(--bg-base); border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); padding: 40px 0; position: relative;
     }
     .proof-numbers {
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-      flex-wrap: wrap;
-      gap: 16px;
+      display: flex; justify-content: center; align-items: stretch;
+      flex-wrap: wrap; gap: 16px;
     }
     .proof-item {
-      text-align: center;
-      padding: 20px 32px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      flex: 1;
-      min-width: 160px;
+      text-align: center; padding: 20px 32px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); flex: 1; min-width: 160px;
       transition: all 0.3s;
     }
     .proof-item:hover {
-      border-color: rgba(16,185,129,0.3);
-      transform: translateY(-3px);
+      border-color: rgba(16,185,129,0.3); transform: translateY(-3px);
       box-shadow: var(--shadow-glow);
     }
     .proof-item .pn {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(30px, 4vw, 50px);
-      font-weight: 900;
-      color: var(--emerald);
-      line-height: 1;
-      letter-spacing: -1px;
+      font-family: 'Outfit', sans-serif; font-size: clamp(30px, 4vw, 50px);
+      font-weight: 900; color: var(--emerald); line-height: 1; letter-spacing: -1px;
     }
-    .proof-item .pl {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 6px;
-      font-weight: 500;
-    }
+    .proof-item .pl { font-size: 13px; color: var(--text-muted); margin-top: 6px; font-weight: 500; }
+    .proof-item.live-counter .pn { color: var(--gold); }
 
-    /* ═══════════════════════════════════════════
-       MODULES / WHAT'S INSIDE
-    ═══════════════════════════════════════════ */
-    #what-you-get {
-      background: var(--bg-deep);
-      position: relative;
-    }
+    /* ═══ MODULES ═══ */
+    #what-you-get { background: var(--bg-deep); position: relative; }
     #what-you-get::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 300px;
-      background: var(--grad-section);
-      pointer-events: none;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 300px;
+      background: var(--grad-section); pointer-events: none;
     }
     .module-list { display: flex; flex-direction: column; gap: 16px; }
     .module-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 28px 32px;
-      display: flex;
-      gap: 24px;
-      align-items: flex-start;
-      transition: all 0.4s var(--ease-out);
-      position: relative;
-      overflow: hidden;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      transition: all 0.4s var(--ease-out); position: relative;
     }
     .module-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; bottom: 0;
-      width: 3px;
-      background: var(--emerald);
-      opacity: 0;
-      transition: opacity 0.3s;
+      content: ''; position: absolute; top: 0; left: 0; bottom: 0;
+      width: 3px; background: var(--emerald); opacity: 0; transition: opacity 0.3s;
     }
     .module-card:hover {
-      border-color: rgba(16,185,129,0.3);
-      transform: translateX(4px);
+      border-color: rgba(16,185,129,0.3); transform: translateX(4px);
       box-shadow: -4px 0 20px rgba(16,185,129,0.08);
     }
     .module-card:hover::before { opacity: 1; }
@@ -600,462 +514,402 @@
       background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, var(--bg-card) 60%);
     }
     .module-card.core-module::before { opacity: 1; background: var(--gold); }
+    .module-header {
+      padding: 28px 32px; display: flex; gap: 24px; align-items: flex-start;
+      cursor: pointer; user-select: none;
+    }
     .module-num {
-      flex-shrink: 0;
-      width: 48px; height: 48px;
+      flex-shrink: 0; width: 48px; height: 48px;
       border-radius: var(--radius-sm);
-      background: var(--emerald-glow);
-      border: 2px solid rgba(16,185,129,0.25);
+      background: var(--emerald-glow); border: 2px solid rgba(16,185,129,0.25);
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Outfit', sans-serif;
-      font-size: 18px; font-weight: 900; color: var(--emerald);
-      transition: all 0.3s;
+      font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 900;
+      color: var(--emerald); transition: all 0.3s;
     }
     .module-card:hover .module-num {
-      background: var(--emerald);
-      color: #000;
-      border-color: var(--emerald);
+      background: var(--emerald); color: #000; border-color: var(--emerald);
     }
     .core-module .module-num {
-      background: var(--gold) !important;
-      color: #000 !important;
+      background: var(--gold) !important; color: #000 !important;
       border-color: var(--gold) !important;
     }
     .module-content h3 {
       font-family: 'Outfit', 'Inter', sans-serif;
-      font-size: clamp(16px, 1.6vw, 20px);
-      font-weight: 800;
-      margin-bottom: 8px;
-      line-height: 1.3;
+      font-size: clamp(16px, 1.6vw, 20px); font-weight: 800;
+      margin-bottom: 8px; line-height: 1.3;
     }
     .module-content p {
-      font-size: clamp(13px, 1.2vw, 15px);
-      color: var(--text-muted);
-      line-height: 1.6;
+      font-size: clamp(13px, 1.2vw, 15px); color: var(--text-muted); line-height: 1.6;
     }
     .module-content .lessons {
-      margin-top: 14px;
-      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;
     }
     .lesson-pill {
-      font-size: 11px; font-weight: 600;
-      color: var(--text-muted);
-      background: var(--bg-card2);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 4px 14px;
-      transition: all 0.2s;
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      background: var(--bg-card2); border: 1px solid var(--border);
+      border-radius: 100px; padding: 4px 14px; transition: all 0.2s;
     }
     .module-card:hover .lesson-pill {
-      border-color: rgba(16,185,129,0.2);
-      color: var(--text-soft);
+      border-color: rgba(16,185,129,0.2); color: var(--text-soft);
     }
     .core-badge {
-      font-size: 10px; font-weight: 800;
-      color: var(--gold);
-      background: var(--gold-glow);
-      border: 1px solid rgba(247,201,72,0.3);
-      border-radius: 100px;
-      padding: 2px 10px;
-      margin-left: 10px;
-      letter-spacing: 1px;
+      font-size: 10px; font-weight: 800; color: var(--gold);
+      background: var(--gold-glow); border: 1px solid rgba(247,201,72,0.3);
+      border-radius: 100px; padding: 2px 10px; margin-left: 10px; letter-spacing: 1px;
+    }
+    .module-expand-icon {
+      margin-left: auto; flex-shrink: 0; width: 32px; height: 32px;
+      border-radius: 50%; background: var(--emerald-glow);
+      border: 1px solid rgba(16,185,129,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--emerald); font-size: 18px; font-weight: 700;
+      transition: all 0.3s var(--ease-out); align-self: center;
+    }
+    .module-card.expanded .module-expand-icon {
+      transform: rotate(45deg); background: var(--emerald); color: #000;
+      border-color: var(--emerald);
+    }
+    .module-details {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.5s var(--ease-out);
+      border-top: 0px solid transparent;
+    }
+    .module-card.expanded .module-details {
+      max-height: 400px; border-top: 1px solid var(--border);
+    }
+    .module-details-inner {
+      padding: 20px 32px 24px 104px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .module-lesson-item {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; color: var(--text-soft);
+    }
+    .module-lesson-check {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--emerald-glow); border: 1px solid rgba(16,185,129,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: var(--emerald); flex-shrink: 0;
     }
 
-    /* ── Bonus ── */
+    /* Bonus card */
     .bonus-card {
       margin-top: 24px;
       background: linear-gradient(135deg, rgba(247,201,72,0.04) 0%, var(--bg-card) 60%);
-      border: 1px solid rgba(247,201,72,0.2);
-      border-radius: var(--radius-lg);
-      padding: 28px 32px;
-      position: relative;
-      overflow: hidden;
+      border: 1px solid rgba(247,201,72,0.2); border-radius: var(--radius-lg);
+      padding: 28px 32px; position: relative; overflow: hidden;
     }
     .bonus-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; bottom: 0;
-      width: 3px;
-      background: var(--gold);
+      content: ''; position: absolute; top: 0; left: 0; bottom: 0;
+      width: 3px; background: var(--gold);
     }
     .bonus-card h3 {
       font-family: 'Outfit', 'Inter', sans-serif;
-      font-size: clamp(17px, 2vw, 22px);
-      font-weight: 800;
-      margin-bottom: 10px;
+      font-size: clamp(17px, 2vw, 22px); font-weight: 800; margin-bottom: 10px;
     }
     .bonus-card p {
-      font-size: clamp(13px, 1.2vw, 16px);
-      color: var(--text-muted);
-      line-height: 1.65;
+      font-size: clamp(13px, 1.2vw, 16px); color: var(--text-muted); line-height: 1.65;
     }
 
-    /* ═══════════════════════════════════════════
-       WHO IT'S FOR
-    ═══════════════════════════════════════════ */
+    /* ═══ WHO IT'S FOR ═══ */
     #for-who {
-      background: var(--bg-base);
-      border-top: 1px solid var(--border);
+      background: var(--bg-base); border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
-    .forwho-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
+    .forwho-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .forwho-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 22px 24px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 22px 24px;
+      display: flex; gap: 16px; align-items: flex-start;
       transition: all 0.3s var(--ease-out);
     }
     .forwho-card:hover {
-      border-color: rgba(16,185,129,0.3);
-      transform: translateY(-2px);
+      border-color: rgba(16,185,129,0.3); transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
     .forwho-card .fw-icon {
       font-size: 24px; flex-shrink: 0; margin-top: 2px;
       width: 44px; height: 44px;
       display: flex; align-items: center; justify-content: center;
-      background: var(--emerald-glow);
-      border-radius: var(--radius-sm);
+      background: var(--emerald-glow); border-radius: var(--radius-sm);
     }
     .forwho-card p {
-      font-size: clamp(13px, 1.2vw, 15px);
-      color: var(--text-soft);
-      line-height: 1.55;
+      font-size: clamp(13px, 1.2vw, 15px); color: var(--text-soft); line-height: 1.55;
     }
 
-    /* ═══════════════════════════════════════════
-       TESTIMONIALS
-    ═══════════════════════════════════════════ */
+    /* ═══ TESTIMONIALS (WhatsApp Style) ═══ */
     #testimonials { background: var(--bg-deep); }
-    .testi-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 20px;
-    }
+    .testi-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
     .testi-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      transition: all 0.4s var(--ease-out);
-      position: relative;
-      overflow: hidden;
-    }
-    .testi-card::before {
-      content: '"';
-      position: absolute;
-      top: -10px; right: 16px;
-      font-size: 120px;
-      font-weight: 900;
-      color: rgba(16,185,129,0.04);
-      font-family: Georgia, serif;
-      line-height: 1;
-      pointer-events: none;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: all 0.4s var(--ease-out); position: relative;
     }
     .testi-card:hover {
-      border-color: rgba(16,185,129,0.3);
-      transform: translateY(-6px);
+      border-color: rgba(16,185,129,0.3); transform: translateY(-6px);
       box-shadow: 0 16px 48px rgba(0,0,0,0.25), var(--shadow-glow);
     }
-    .testi-stars {
-      color: var(--gold);
-      font-size: 15px;
-      letter-spacing: 3px;
+    /* WhatsApp-style header */
+    .testi-wa-header {
+      background: #075E54; padding: 12px 16px;
+      display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-    .testi-body {
-      font-size: clamp(13px, 1.2vw, 15px);
-      color: var(--text-soft);
-      line-height: 1.7;
-      flex: 1;
+    .testi-wa-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(37,211,102,0.3), rgba(37,211,102,0.1));
+      border: 2px solid rgba(37,211,102,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800; color: #25D366;
     }
-    .testi-result {
-      background: var(--emerald-glow);
-      border: 1px solid rgba(16,185,129,0.2);
+    .testi-wa-name { font-size: 14px; font-weight: 700; color: #fff; }
+    .testi-wa-status { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 1px; }
+    .testi-wa-verified {
+      margin-left: auto; width: 20px; height: 20px; border-radius: 50%;
+      background: #25D366; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: #fff; font-weight: 900;
+    }
+    /* Chat body */
+    .testi-chat-body {
+      padding: 16px; flex: 1;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .testi-bubble {
+      background: #1B3A33; border-radius: 0 12px 12px 12px;
+      padding: 12px 14px; margin-bottom: 10px; position: relative;
+      max-width: 95%;
+    }
+    .testi-bubble p {
+      font-size: clamp(13px, 1.2vw, 14px); color: #E9EDEF; line-height: 1.6;
+    }
+    .testi-bubble-time {
+      display: flex; align-items: center; justify-content: flex-end; gap: 4px;
+      margin-top: 6px; font-size: 11px; color: rgba(255,255,255,0.4);
+    }
+    .testi-bubble-time .wa-checks { color: #53BDEB; font-size: 13px; }
+    /* Result badge */
+    .testi-result-badge {
+      margin: 0 16px 16px; padding: 10px 14px;
+      background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.25);
       border-radius: var(--radius-sm);
-      padding: 10px 14px;
-      font-size: 13px; font-weight: 700;
-      color: var(--emerald);
       display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 700; color: #25D366;
     }
-    .testi-result::before {
-      content: '✓';
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      background: var(--emerald);
-      color: #000;
+    .testi-result-badge::before {
+      content: '✓'; width: 20px; height: 20px; border-radius: 50%;
+      background: #25D366; color: #fff;
       display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 900;
-      flex-shrink: 0;
+      font-size: 11px; font-weight: 900; flex-shrink: 0;
     }
-    .testi-author { display: flex; align-items: center; gap: 12px; }
-    .testi-avatar {
-      width: 40px; height: 40px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--emerald-glow), rgba(16,185,129,0.2));
-      border: 2px solid rgba(16,185,129,0.3);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 800; color: var(--emerald);
+    /* Star rating */
+    .testi-stars-row {
+      padding: 0 16px 14px; display: flex; align-items: center; gap: 3px;
     }
-    .testi-name { font-size: 14px; font-weight: 700; color: var(--text); }
-    .testi-loc  { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+    .testi-star { color: var(--gold); font-size: 14px; }
+    .testi-star.empty { color: var(--text-dim); }
 
-    /* ═══════════════════════════════════════════
-       VALUE STACK
-    ═══════════════════════════════════════════ */
+    /* ═══ TRUST BAR ═══ */
+    #trust-bar {
+      background: var(--bg-base); border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); padding: 40px 0;
+    }
+    .trust-inner {
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; flex-wrap: wrap;
+    }
+    .trust-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--text-dim);
+    }
+    .trust-logos { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+    .trust-logo {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 700; color: var(--text-muted);
+      padding: 10px 20px; border: 1px solid var(--border);
+      border-radius: 100px; background: var(--bg-card);
+      transition: all 0.3s;
+    }
+    .trust-logo:hover { border-color: rgba(16,185,129,0.3); color: var(--text-soft); }
+    .trust-logo .tl-icon { font-size: 18px; }
+
+    /* ═══ VALUE STACK ═══ */
     #value {
-      background: var(--bg-base);
-      border-top: 1px solid var(--border);
+      background: var(--bg-base); border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
     .value-list { display: flex; flex-direction: column; gap: 0; }
     .value-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 24px;
-      border-bottom: 1px solid var(--border);
-      gap: 16px;
-      transition: background 0.2s;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 24px; border-bottom: 1px solid var(--border);
+      gap: 16px; transition: background 0.2s;
     }
     .value-item:hover { background: rgba(16,185,129,0.02); }
     .value-item:last-child { border-bottom: none; }
-    .value-item-left {
-      display: flex; align-items: center; gap: 14px;
-      flex: 1;
-    }
+    .value-item-left { display: flex; align-items: center; gap: 14px; flex: 1; }
     .value-check {
-      width: 24px; height: 24px;
-      border-radius: 50%;
-      background: var(--emerald);
+      width: 24px; height: 24px; border-radius: 50%; background: var(--emerald);
       display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 900; color: #000;
-      flex-shrink: 0;
+      font-size: 12px; font-weight: 900; color: #000; flex-shrink: 0;
     }
-    .value-item-name {
-      font-size: clamp(14px, 1.3vw, 16px);
-      color: var(--text-soft);
-    }
-    .value-item-right {
-      display: flex; align-items: center; gap: 14px;
-    }
+    .value-item-name { font-size: clamp(14px, 1.3vw, 16px); color: var(--text-soft); }
+    .value-item-right { display: flex; align-items: center; gap: 14px; }
     .value-item-strike {
-      font-size: 14px;
-      color: var(--text-dim);
-      text-decoration: line-through;
-      white-space: nowrap;
+      font-size: 14px; color: var(--text-dim); text-decoration: line-through; white-space: nowrap;
     }
-    .value-item-inc {
-      font-size: 13px; font-weight: 700;
-      color: var(--emerald);
-      white-space: nowrap;
-    }
+    .value-item-inc { font-size: 13px; font-weight: 700; color: var(--emerald); white-space: nowrap; }
     .value-total {
-      margin-top: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      margin-top: 24px; display: flex; align-items: center; justify-content: space-between;
       background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(16,185,129,0.02) 100%);
-      border: 1px solid rgba(16,185,129,0.25);
-      border-radius: var(--radius-md);
-      padding: 22px 28px;
+      border: 1px solid rgba(16,185,129,0.25); border-radius: var(--radius-md);
+      padding: 22px 28px; position: relative; overflow: hidden;
     }
-    .value-total .vt-label {
-      font-size: 15px; color: var(--text-muted); font-weight: 600;
-    }
-    .value-total .vt-right {
-      display: flex; align-items: center; gap: 12px;
-    }
-    .value-total .vt-cross {
-      font-size: 15px; color: var(--text-dim);
-      text-decoration: line-through;
-    }
+    .value-total .vt-label { font-size: 15px; color: var(--text-muted); font-weight: 600; }
+    .value-total .vt-right { display: flex; align-items: center; gap: 12px; }
+    .value-total .vt-cross { font-size: 15px; color: var(--text-dim); text-decoration: line-through; }
     .value-total .vt-num {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(24px, 3vw, 36px);
-      font-weight: 900;
-      color: var(--emerald);
+      font-family: 'Outfit', sans-serif; font-size: clamp(24px, 3vw, 36px);
+      font-weight: 900; color: var(--emerald);
+    }
+    .save-badge {
+      position: absolute; top: 8px; right: 12px;
+      background: var(--gold); color: #000; font-size: 11px; font-weight: 800;
+      padding: 3px 12px; border-radius: 100px; letter-spacing: 0.5px;
     }
 
-    /* ═══════════════════════════════════════════
-       PRICING
-    ═══════════════════════════════════════════ */
-    #pricing {
-      background: var(--bg-deep);
-      position: relative;
-      overflow: hidden;
-    }
+    /* ═══ PRICING ═══ */
+    #pricing { background: var(--bg-deep); position: relative; overflow: hidden; }
     #pricing::before {
-      content: '';
-      position: absolute;
-      width: 800px; height: 800px;
-      top: 50%; left: 50%;
+      content: ''; position: absolute;
+      width: 800px; height: 800px; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       background: radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 60%);
       pointer-events: none;
     }
     .price-card {
-      max-width: 580px;
-      margin: 0 auto;
-      background: var(--bg-card);
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
+      max-width: 580px; margin: 0 auto;
+      background: var(--bg-card); border-radius: var(--radius-xl);
+      overflow: hidden; position: relative; z-index: 1;
       box-shadow: 0 32px 80px rgba(0,0,0,0.4), 0 0 60px rgba(16,185,129,0.08);
     }
-    /* Animated gradient border */
     .price-card::before {
-      content: '';
-      position: absolute; inset: -2px;
+      content: ''; position: absolute; inset: -2px;
       border-radius: calc(var(--radius-xl) + 2px);
       background: conic-gradient(from 0deg, var(--emerald), var(--gold), var(--emerald-bright), var(--emerald));
-      z-index: -1;
-      animation: border-spin 4s linear infinite;
+      z-index: -1; animation: border-spin 4s linear infinite;
     }
-    @keyframes border-spin {
-      100% { transform: rotate(360deg); }
-    }
+    @keyframes border-spin { 100% { transform: rotate(360deg); } }
     .price-card::after {
-      content: '';
-      position: absolute; inset: 2px;
+      content: ''; position: absolute; inset: 2px;
       border-radius: calc(var(--radius-xl) - 0px);
-      background: var(--bg-card);
-      z-index: -1;
+      background: var(--bg-card); z-index: -1;
     }
     .price-card-head {
       background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(16,185,129,0.02));
-      padding: 32px 40px;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-      position: relative;
+      padding: 32px 40px; text-align: center;
+      border-bottom: 1px solid var(--border); position: relative;
     }
     .price-ribbon {
       position: absolute; top: 16px; right: -34px;
-      background: var(--gold);
-      color: #000;
-      font-size: 10px; font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 5px 40px;
-      transform: rotate(45deg);
+      background: var(--gold); color: #000;
+      font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+      padding: 5px 40px; transform: rotate(45deg);
     }
     .price-card-head .pc-tag {
       font-size: 11px; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--emerald);
-      margin-bottom: 10px;
+      text-transform: uppercase; color: var(--emerald); margin-bottom: 10px;
     }
     .price-card-head .pc-name {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(22px, 3vw, 30px);
-      font-weight: 900;
-      margin-bottom: 6px;
+      font-size: clamp(22px, 3vw, 30px); font-weight: 900; margin-bottom: 6px;
     }
-    .price-card-head .pc-sub {
-      font-size: 14px; color: var(--text-muted);
-    }
+    .price-card-head .pc-sub { font-size: 14px; color: var(--text-muted); }
     .price-card-body { padding: 36px 40px; }
+    /* Countdown in pricing */
+    .price-countdown {
+      text-align: center; margin-bottom: 24px;
+      padding: 14px 20px; border-radius: var(--radius-md);
+      background: rgba(248,113,113,0.06); border: 1px solid rgba(248,113,113,0.15);
+    }
+    .price-countdown-label {
+      font-size: 12px; font-weight: 700; color: var(--red);
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .price-countdown-timer {
+      display: flex; justify-content: center; gap: 12px;
+    }
+    .countdown-unit {
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .countdown-num {
+      font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 900;
+      color: var(--text); line-height: 1;
+      background: var(--bg-card2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 8px 14px; min-width: 52px;
+    }
+    .countdown-label {
+      font-size: 10px; color: var(--text-dim); margin-top: 4px;
+      text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
+    }
+    .countdown-sep {
+      font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 900;
+      color: var(--text-dim); line-height: 1; padding-top: 8px;
+    }
+
     .price-main { text-align: center; margin-bottom: 32px; }
     .price-main .p-was {
-      font-size: 15px; color: var(--text-dim);
-      text-decoration: line-through; margin-bottom: 6px;
+      font-size: 15px; color: var(--text-dim); text-decoration: line-through; margin-bottom: 6px;
     }
     .price-main .p-now {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(56px, 8vw, 86px);
-      font-weight: 900;
-      color: var(--emerald);
-      line-height: 1;
-      letter-spacing: -3px;
+      font-size: clamp(56px, 8vw, 86px); font-weight: 900;
+      color: var(--emerald); line-height: 1; letter-spacing: -3px;
     }
-    .price-main .p-cur {
-      font-size: 30px; vertical-align: top;
-      padding-top: 14px; display: inline-block;
-    }
-    .price-main .p-label {
-      font-size: 14px; color: var(--text-muted);
-      margin-top: 8px;
-    }
+    .price-main .p-cur { font-size: 30px; vertical-align: top; padding-top: 14px; display: inline-block; }
+    .price-main .p-label { font-size: 14px; color: var(--text-muted); margin-top: 8px; }
     .price-includes {
-      list-style: none;
-      display: flex; flex-direction: column; gap: 14px;
-      margin-bottom: 32px;
+      list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px;
     }
     .price-includes li {
       display: flex; align-items: center; gap: 14px;
       font-size: 15px; color: var(--text-soft);
     }
     .price-includes li .pi-check {
-      width: 22px; height: 22px;
-      border-radius: 50%;
-      background: var(--emerald);
-      color: #000;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--emerald); color: #000;
       display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 900;
-      flex-shrink: 0;
+      font-size: 11px; font-weight: 900; flex-shrink: 0;
     }
     .price-btn {
-      display: block;
-      width: 100%;
-      background: var(--emerald);
-      color: #000;
-      font-weight: 900;
-      font-size: 18px;
-      padding: 20px;
-      border-radius: 100px;
-      text-align: center;
-      border: none; cursor: pointer;
-      transition: all 0.3s var(--ease-out);
-      letter-spacing: 0.2px;
-      position: relative;
-      overflow: hidden;
+      display: block; width: 100%; background: var(--emerald); color: #000;
+      font-weight: 900; font-size: 18px; padding: 20px;
+      border-radius: 100px; text-align: center; border: none; cursor: pointer;
+      transition: all 0.3s var(--ease-out); letter-spacing: 0.2px;
+      position: relative; overflow: hidden;
       box-shadow: 0 4px 24px rgba(16,185,129,0.25);
     }
     .price-btn::before {
-      content: '';
-      position: absolute; inset: 0;
+      content: ''; position: absolute; inset: 0;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
       transform: translateX(-100%);
     }
     .price-btn:hover {
-      background: var(--emerald-bright);
-      transform: translateY(-2px);
+      background: var(--emerald-bright); transform: translateY(-2px);
       box-shadow: 0 8px 40px rgba(16,185,129,0.4);
     }
-    .price-btn:hover::before {
-      animation: btn-shimmer 0.6s ease-out;
-    }
+    .price-btn:hover::before { animation: btn-shimmer 0.6s ease-out; }
     .price-footnote {
-      text-align: center;
-      font-size: 12px;
-      color: var(--text-dim);
-      margin-top: 16px;
-      display: flex; align-items: center; justify-content: center; gap: 6px;
+      text-align: center; font-size: 12px; color: var(--text-dim);
+      margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 6px;
     }
-    .price-footnote::before {
-      content: '🔒';
-      font-size: 13px;
-    }
+    .price-footnote::before { content: '🔒'; font-size: 13px; }
 
-    /* ── Guarantee ── */
+    /* Guarantee */
     .guarantee-box {
-      max-width: 580px;
-      margin: 48px auto 0;
-      background: var(--bg-card);
-      border: 1px solid var(--border2);
-      border-radius: var(--radius-lg);
-      padding: 28px 32px;
-      display: flex;
-      gap: 22px;
-      align-items: flex-start;
+      max-width: 580px; margin: 48px auto 0;
+      background: var(--bg-card); border: 1px solid var(--border2);
+      border-radius: var(--radius-lg); padding: 28px 32px;
+      display: flex; gap: 22px; align-items: flex-start;
     }
     .guarantee-box .g-icon {
       font-size: 44px; flex-shrink: 0;
@@ -1065,212 +919,116 @@
       font-family: 'Outfit', 'Inter', sans-serif;
       font-size: 18px; font-weight: 800; margin-bottom: 8px;
     }
-    .guarantee-box p {
-      font-size: 14px; color: var(--text-muted); line-height: 1.65;
-    }
+    .guarantee-box p { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
 
-    /* ═══════════════════════════════════════════
-       FAQ
-    ═══════════════════════════════════════════ */
+    /* ═══ FAQ ═══ */
     #faq {
-      background: var(--bg-base);
-      border-top: 1px solid var(--border);
+      background: var(--bg-base); border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
-    .faq-list {
-      display: flex; flex-direction: column;
-      max-width: 700px; margin: 0 auto;
-    }
-    .faq-item {
-      border-bottom: 1px solid var(--border);
-    }
+    .faq-list { display: flex; flex-direction: column; max-width: 700px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--border); }
     .faq-item:first-child { border-top: 1px solid var(--border); }
     .faq-q {
       width: 100%; text-align: left; background: none; border: none; cursor: pointer;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 22px 0;
-      font-size: clamp(14px, 1.4vw, 17px); font-weight: 700; color: var(--text);
-      font-family: 'Inter', sans-serif;
-      gap: 16px;
+      padding: 22px 0; font-size: clamp(14px, 1.4vw, 17px); font-weight: 700;
+      color: var(--text); font-family: 'Inter', sans-serif; gap: 16px;
       transition: color 0.2s;
     }
     .faq-q:hover { color: var(--emerald); }
     .faq-icon-wrap {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      background: var(--emerald-glow);
-      border: 1px solid rgba(16,185,129,0.2);
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--emerald-glow); border: 1px solid rgba(16,185,129,0.2);
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      transition: all 0.3s var(--ease-out);
+      flex-shrink: 0; transition: all 0.3s var(--ease-out);
     }
-    .faq-q.open .faq-icon-wrap {
-      background: var(--emerald);
-      border-color: var(--emerald);
-    }
+    .faq-q.open .faq-icon-wrap { background: var(--emerald); border-color: var(--emerald); }
     .faq-icon {
-      color: var(--emerald);
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 1;
+      color: var(--emerald); font-size: 18px; font-weight: 700; line-height: 1;
       transition: transform 0.3s var(--ease-out), color 0.2s;
     }
-    .faq-q.open .faq-icon {
-      transform: rotate(45deg);
-      color: #000;
-    }
+    .faq-q.open .faq-icon { transform: rotate(45deg); color: #000; }
     .faq-a {
-      max-height: 0;
-      overflow: hidden;
+      max-height: 0; overflow: hidden;
       transition: max-height 0.4s var(--ease-out), padding 0.4s var(--ease-out);
-      font-size: clamp(13px, 1.2vw, 15px);
-      color: var(--text-muted);
-      line-height: 1.7;
-      padding-bottom: 0;
+      font-size: clamp(13px, 1.2vw, 15px); color: var(--text-muted);
+      line-height: 1.7; padding-bottom: 0;
     }
-    .faq-a.open {
-      max-height: 300px;
-      padding-bottom: 22px;
-    }
+    .faq-a.open { max-height: 300px; padding-bottom: 22px; }
 
-    /* ═══════════════════════════════════════════
-       FINAL CTA
-    ═══════════════════════════════════════════ */
+    /* ═══ FINAL CTA ═══ */
     #final-cta {
-      background: var(--bg-deep);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+      background: var(--bg-deep); text-align: center;
+      position: relative; overflow: hidden;
     }
     #final-cta::before {
-      content: '';
-      position: absolute;
-      width: 100%; height: 100%;
-      bottom: 0; left: 0;
+      content: ''; position: absolute; width: 100%; height: 100%; bottom: 0; left: 0;
       background: radial-gradient(ellipse 90% 60% at 50% 100%, rgba(16,185,129,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
     #final-cta h2 {
       font-family: 'Outfit', 'Inter', sans-serif;
-      font-size: clamp(30px, 4.5vw, 56px);
-      font-weight: 900;
-      letter-spacing: -1px;
-      line-height: 1.1;
-      margin-bottom: 18px;
-      position: relative;
+      font-size: clamp(30px, 4.5vw, 56px); font-weight: 900;
+      letter-spacing: -1px; line-height: 1.1; margin-bottom: 18px; position: relative;
     }
     #final-cta p {
-      font-size: clamp(15px, 1.6vw, 20px);
-      color: var(--text-soft);
-      max-width: 560px;
-      margin: 0 auto 40px;
-      line-height: 1.65;
-      position: relative;
+      font-size: clamp(15px, 1.6vw, 20px); color: var(--text-soft);
+      max-width: 560px; margin: 0 auto 40px; line-height: 1.65; position: relative;
     }
-    .final-cta-btn {
-      position: relative;
-    }
-    .final-cta-btn .btn-primary {
-      font-size: 20px;
-      padding: 22px 60px;
-    }
+    .final-cta-btn { position: relative; }
+    .final-cta-btn .btn-primary { font-size: 20px; padding: 22px 60px; }
     .final-trust {
-      margin-top: 18px;
-      font-size: 13px;
-      color: var(--text-dim);
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
+      margin-top: 18px; font-size: 13px; color: var(--text-dim); position: relative;
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; flex-wrap: wrap;
     }
 
-    /* ═══════════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════════ */
+    /* ═══ FOOTER ═══ */
     footer {
-      background: var(--bg-deep);
-      border-top: 1px solid var(--border);
-      padding: 36px 24px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--text-dim);
-      line-height: 2;
+      background: var(--bg-deep); border-top: 1px solid var(--border);
+      padding: 36px 24px; text-align: center; font-size: 12px;
+      color: var(--text-dim); line-height: 2;
     }
     footer a { color: var(--text-muted); transition: color 0.2s; }
     footer a:hover { color: var(--emerald); }
 
-    /* ═══════════════════════════════════════════
-       COUNTRY FLOAT
-    ═══════════════════════════════════════════ */
+    /* ═══ COUNTRY FLOAT ═══ */
     #country-float {
-      position: fixed;
-      bottom: 20px; right: 20px;
-      z-index: 200;
-      background: rgba(10,14,26,0.92);
-      border: 1px solid var(--border2);
-      border-radius: 100px;
-      padding: 10px 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-      transition: all 0.3s;
+      position: fixed; bottom: 20px; right: 20px; z-index: 200;
+      background: rgba(10,14,26,0.92); border: 1px solid var(--border2);
+      border-radius: 100px; padding: 10px 18px;
+      display: flex; align-items: center; gap: 10px;
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4); transition: all 0.3s;
     }
-    #country-float:hover {
-      border-color: rgba(16,185,129,0.3);
-    }
+    #country-float:hover { border-color: rgba(16,185,129,0.3); }
     #country-float label {
-      font-size: 12px; color: var(--text-muted);
-      font-weight: 600; text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
+      font-size: 12px; color: var(--text-muted); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
     }
     #country-float select {
-      background: transparent; border: none;
-      color: var(--emerald);
-      font-size: 13px; font-weight: 700;
-      cursor: pointer;
-      outline: none;
-      font-family: 'Inter', sans-serif;
-      -webkit-appearance: none;
+      background: transparent; border: none; color: var(--emerald);
+      font-size: 13px; font-weight: 700; cursor: pointer; outline: none;
+      font-family: 'Inter', sans-serif; -webkit-appearance: none;
     }
-    #country-float select option {
-      background: var(--bg-card);
-      color: var(--text);
-    }
+    #country-float select option { background: var(--bg-card); color: var(--text); }
 
-    /* ═══════════════════════════════════════════
-       SOCIAL PROOF TOAST
-    ═══════════════════════════════════════════ */
+    /* ═══ SOCIAL PROOF TOAST ═══ */
     #sp-toast {
-      position: fixed;
-      bottom: 80px;
-      left: 20px;
-      z-index: 300;
-      background: var(--bg-card);
-      border: 1px solid var(--border2);
+      position: fixed; bottom: 80px; left: 20px; z-index: 300;
+      background: var(--bg-card); border: 1px solid var(--border2);
       border-left: 4px solid var(--emerald);
-      border-radius: var(--radius-md);
-      padding: 16px 18px 16px 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      max-width: 320px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      border-radius: var(--radius-md); padding: 16px 18px 16px 16px;
+      display: flex; align-items: center; gap: 14px;
+      max-width: 320px; box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       transform: translateX(-380px);
       transition: transform 0.5s var(--ease-bounce);
     }
     #sp-toast.visible { transform: translateX(0); }
     .sp-avatar {
-      flex-shrink: 0;
-      width: 40px; height: 40px;
-      border-radius: 50%;
+      flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
       background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(16,185,129,0.05));
       border: 2px solid rgba(16,185,129,0.3);
       display: flex; align-items: center; justify-content: center;
@@ -1281,23 +1039,87 @@
     .sp-msg  { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
     .sp-time { font-size: 11px; color: var(--emerald); margin-top: 4px; font-weight: 600; }
     .sp-close {
+      background: none; border: none; cursor: pointer; color: var(--text-dim);
+      font-size: 16px; line-height: 1; padding: 4px 6px; flex-shrink: 0;
+      border-radius: 50%; transition: all 0.2s;
+    }
+    .sp-close:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+
+    /* ═══ STICKY MOBILE CTA ═══ */
+    #sticky-cta {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 250;
+      background: rgba(6,11,24,0.95); border-top: 1px solid rgba(16,185,129,0.3);
+      padding: 12px 20px; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      transform: translateY(100%); transition: transform 0.4s var(--ease-out);
+    }
+    #sticky-cta.visible { transform: translateY(0); }
+    .sticky-cta-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      max-width: 860px; margin: 0 auto;
+    }
+    .sticky-cta-price {
+      display: flex; flex-direction: column;
+    }
+    .sticky-cta-was {
+      font-size: 12px; color: var(--text-dim); text-decoration: line-through;
+    }
+    .sticky-cta-now {
+      font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 900;
+      color: var(--emerald); line-height: 1;
+    }
+    .sticky-cta-btn {
+      background: var(--emerald); color: #000; font-weight: 800; font-size: 14px;
+      padding: 12px 28px; border-radius: 100px; border: none; cursor: pointer;
+      white-space: nowrap; transition: all 0.3s;
+      box-shadow: 0 2px 12px rgba(16,185,129,0.3);
+    }
+    .sticky-cta-btn:hover { background: var(--emerald-bright); }
+
+    /* ═══ EXIT INTENT POPUP ═══ */
+    #exit-popup {
+      display: none; position: fixed; inset: 0; z-index: 10000;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center;
+    }
+    #exit-popup.visible { display: flex; }
+    .exit-popup-card {
+      background: var(--bg-card); border: 1px solid var(--border2);
+      border-radius: var(--radius-xl); padding: 48px 40px; max-width: 480px;
+      width: 90%; text-align: center; position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+      animation: popup-in 0.4s var(--ease-bounce);
+    }
+    @keyframes popup-in {
+      0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .exit-popup-close {
+      position: absolute; top: 16px; right: 16px;
       background: none; border: none; cursor: pointer;
-      color: var(--text-dim); font-size: 16px; line-height: 1;
-      padding: 4px 6px; flex-shrink: 0;
-      border-radius: 50%;
+      color: var(--text-dim); font-size: 24px; line-height: 1;
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
       transition: all 0.2s;
     }
-    .sp-close:hover {
-      color: var(--text);
-      background: rgba(255,255,255,0.05);
+    .exit-popup-close:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+    .exit-popup-card .ep-emoji { font-size: 56px; margin-bottom: 16px; }
+    .exit-popup-card h3 {
+      font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 900;
+      margin-bottom: 12px; line-height: 1.2;
     }
+    .exit-popup-card p {
+      font-size: 15px; color: var(--text-muted); line-height: 1.65; margin-bottom: 28px;
+    }
+    .exit-popup-card .btn-primary { width: 100%; }
 
-    /* ═══════════════════════════════════════════
-       RESPONSIVE
-    ═══════════════════════════════════════════ */
+    /* ═══ RESPONSIVE ═══ */
     @media (max-width: 880px) {
       .pain-grid { grid-template-columns: 1fr; gap: 20px; }
       .story-inner::before { display: none; }
+      .hero-bottom { flex-direction: column; gap: 32px; }
+      .hero-mockup { max-width: 220px; }
+      .hiw-connector { display: none; }
+      .hiw-steps { flex-direction: column; gap: 40px; }
     }
     @media (max-width: 720px) {
       .testi-grid { grid-template-columns: 1fr; }
@@ -1308,8 +1130,14 @@
       .price-card-head { padding: 28px 24px; }
       .guarantee-box { flex-direction: column; }
       section { padding: 64px 0; }
-      .module-card { padding: 22px 20px; }
+      .module-header { padding: 22px 20px; }
+      .module-details-inner { padding-left: 20px; }
       #sp-toast { max-width: calc(100vw - 40px); }
+      #sticky-cta { display: block; }
+      #country-float { bottom: 70px; }
+      .trust-logos { gap: 16px; }
+      .trust-logo { font-size: 12px; padding: 8px 14px; }
+      .nav-counter { display: none; }
     }
     @media (max-width: 520px) {
       #hero h1 { font-size: 32px; letter-spacing: -1px; }
@@ -1319,20 +1147,27 @@
       .price-ribbon { display: none; }
       .value-item { flex-direction: column; gap: 8px; }
       .value-item-right { align-self: flex-start; padding-left: 38px; }
+      .hero-mockup { max-width: 180px; }
     }
   </style>
 </head>
 <body>
 
+<!-- ═══ PROGRESS BAR ═══ -->
+<div id="progress-bar"></div>
+
 <!-- ═══ ANNOUNCEMENT BAR ═══ -->
 <div class="ann-bar">
-  <span class="ann-bar-text">🔥 Limited Launch Price &nbsp;<span>|</span>&nbsp; <span class="cur-sym">₦</span><span class="cur-price">5,000</span> One-Time &nbsp;<span>|</span>&nbsp; Instant Access After Payment</span>
+  <span class="ann-bar-text">🔥 Limited Launch Price &nbsp;<span>|</span>&nbsp; <span class="cur-sym">₦</span><span class="cur-price">5,000</span> One-Time &nbsp;<span>|</span>&nbsp; Offer ends in <span class="ann-countdown" id="ann-cd">23:59:59</span></span>
 </div>
 
 <!-- ═══ NAV ═══ -->
 <nav>
   <div class="nav-logo">Digitstem</div>
-  <a href="#pricing" class="nav-cta">Get Instant Access →</a>
+  <div class="nav-right">
+    <div class="nav-counter"><div class="pulse-dot"></div> <span id="live-count">347</span> enrolled</div>
+    <a href="#pricing" class="nav-cta">Get Instant Access →</a>
+  </div>
 </nav>
 
 <!-- ═══ SOCIAL PROOF TOAST ═══ -->
@@ -1346,20 +1181,42 @@
   <button class="sp-close" onclick="hideToast()">✕</button>
 </div>
 
+<!-- ═══ EXIT INTENT POPUP ═══ -->
+<div id="exit-popup">
+  <div class="exit-popup-card">
+    <button class="exit-popup-close" onclick="closeExitPopup()">✕</button>
+    <div class="ep-emoji">⏰</div>
+    <h3>Wait — Don't Leave Empty-Handed</h3>
+    <p>The launch price of <span class="cur-sym">₦</span><span class="cur-price">5,000</span> won't last forever. Hundreds of students have already started raising money with this system. Don't miss out.</p>
+    <a href="#pricing" class="btn-primary" onclick="closeExitPopup()">Get the Guide for <span class="cur-sym">₦</span><span class="cur-price">5,000</span> →</a>
+  </div>
+</div>
+
 <!-- ═══ HERO ═══ -->
 <section id="hero">
+  <canvas id="particles-canvas"></canvas>
   <div class="container">
-    <div class="pre-head">The Fast Money Guide</div>
-    <h1>How Smart People Raise <em><span class="cur-sym">₦</span><span class="cur-goal">50,000</span></em><br>in Less Than <em>48 Hours</em><br>Using Only WhatsApp</h1>
-    <p class="hero-sub">A step-by-step course that shows you exactly how to raise money for any program, course, or investment from your existing contacts. No begging. No borrowing. No waiting.</p>
-    <div class="hero-cta-group">
-      <a href="#pricing" class="btn-primary">Yes, I Want to Raise Money Fast →</a>
-      <a href="#what-you-get" class="btn-ghost">See exactly what's inside ↓</a>
+    <div class="hero-content">
+      <div class="pre-head">The Fast Money Guide</div>
+      <h1>How Smart People Raise <em><span class="cur-sym">₦</span><span class="cur-goal">50,000</span></em><br>in Less Than <em>48 Hours</em><br>Using Only WhatsApp</h1>
+      <p class="hero-sub">A step-by-step course that shows you exactly how to raise money for any program, course, or investment from your existing contacts. No begging. No borrowing. No waiting.</p>
     </div>
-    <div class="hero-badges">
-      <div class="hero-badge"><span class="badge-icon">🌍</span> Works in 14 countries</div>
-      <div class="hero-badge"><span class="badge-icon">📱</span> No ads. Just WhatsApp.</div>
-      <div class="hero-badge"><span class="badge-icon">⚡</span> Instant digital access</div>
+
+    <div class="hero-bottom">
+      <div class="hero-mockup reveal-left">
+        <img src="mockup.png" alt="The Fast Money Guide course preview on mobile" />
+      </div>
+      <div class="hero-cta-side">
+        <div class="hero-cta-group">
+          <a href="#pricing" class="btn-primary">Yes, I Want to Raise Money Fast →</a>
+          <a href="#what-you-get" class="btn-ghost">See exactly what's inside ↓</a>
+        </div>
+        <div class="hero-badges">
+          <div class="hero-badge"><span class="badge-icon">🌍</span> Works in 14 countries</div>
+          <div class="hero-badge"><span class="badge-icon">📱</span> No ads. Just WhatsApp.</div>
+          <div class="hero-badge"><span class="badge-icon">⚡</span> Instant digital access</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1389,7 +1246,7 @@
           <div class="pain-item"><div class="pain-icon good">✓</div><span>You don't need to post publicly. WhatsApp Broadcast is private and personal.</span></div>
           <div class="pain-item"><div class="pain-icon good">✓</div><span>You don't need 100 people. Just 25 giving <span class="cur-sym">₦</span><span class="cur-ask">2,000</span> each is enough.</span></div>
           <div class="pain-item"><div class="pain-icon good">✓</div><span>You don't need weeks. 48 hours is all it takes with the right sequence.</span></div>
-          <div class="pain-item" style="border-bottom:none;"><div class="pain-icon good">✓</div><span>The money is already around you. You just need the system.</span></div>
+          <div class="pain-item"><div class="pain-icon good">✓</div><span>The money is already around you. You just need the system.</span></div>
         </div>
       </div>
     </div>
@@ -1402,58 +1259,59 @@
     <div class="story-inner">
       <div class="tag reveal">How This Was Born</div>
       <div class="story-body">
-        <p class="reveal">
-          A few years ago, I found a program that I knew would change the direction of my career. The kind of opportunity you feel in your gut. I had done the research, spoken to people who had been through it, and I was certain this was it.
-        </p>
-        <p class="reveal">
-          There was just one problem. <strong>I didn't have the money.</strong>
-        </p>
-        <p class="reveal">
-          I had two weeks before enrollment closed. I tried the obvious things first. I checked my savings — not enough. I asked one family member — they said "maybe later." I posted something vague on Facebook about "needing support" — I got three prayer emojis and zero naira.
-        </p>
-
+        <p class="reveal">A few years ago, I found a program that I knew would change the direction of my career. The kind of opportunity you feel in your gut. I had done the research, spoken to people who had been through it, and I was certain this was it.</p>
+        <p class="reveal">There was just one problem. <strong>I didn't have the money.</strong></p>
+        <p class="reveal">I had two weeks before enrollment closed. I tried the obvious things first. I checked my savings — not enough. I asked one family member — they said "maybe later." I posted something vague on Facebook about "needing support" — I got three prayer emojis and zero naira.</p>
         <div class="story-pull reveal">
           <p>"I was watching the deadline get closer, feeling like the opportunity was slipping through my fingers — and there was nothing I could do about it."</p>
         </div>
-
-        <p class="reveal">
-          Then one evening, completely frustrated, I sat down and did something I had never thought to do before. I scrolled through my phone contacts — all of them — and I started asking myself a simple question about each person: <em>"Would this person give me something small if I asked the right way?"</em>
-        </p>
-        <p class="reveal">
-          Not a loan. Not a gift. Just a contribution. A small, specific amount. With a clear reason and a clear deadline.
-        </p>
-        <p class="reveal">
-          I spent that night writing messages. Not begging. Not vague. <strong>Specific, warm, human messages</strong> — sent privately through WhatsApp. Not to a group. Not on a timeline. Person to person.
-        </p>
-        <p class="reveal">
-          By the next morning, money had started coming in.
-        </p>
-        <p class="reveal">
-          By the end of 48 hours, I had raised more than I needed.
-        </p>
-
+        <p class="reveal">Then one evening, completely frustrated, I sat down and did something I had never thought to do before. I scrolled through my phone contacts — all of them — and I started asking myself a simple question about each person: <em>"Would this person give me something small if I asked the right way?"</em></p>
+        <p class="reveal">Not a loan. Not a gift. Just a contribution. A small, specific amount. With a clear reason and a clear deadline.</p>
+        <p class="reveal">I spent that night writing messages. Not begging. Not vague. <strong>Specific, warm, human messages</strong> — sent privately through WhatsApp. Not to a group. Not on a timeline. Person to person.</p>
+        <p class="reveal">By the next morning, money had started coming in.</p>
+        <p class="reveal">By the end of 48 hours, I had raised more than I needed.</p>
         <div class="story-divider"></div>
-
-        <p class="reveal">
-          I was stunned. Not because people gave — but because of <em>how many</em> people gave. People I hadn't spoken to in over a year. A former classmate. Someone from my old church. A colleague I helped with something small two years before. They all showed up.
-        </p>
-        <p class="reveal">
-          The money was never the problem. <strong>The approach was the problem.</strong>
-        </p>
-        <p class="reveal">
-          I had been asking the wrong way, on the wrong platforms, with the wrong framing. The moment I changed the method, everything changed.
-        </p>
-        <p class="reveal">
-          I enrolled in that program. And afterwards, I spent months documenting exactly what I had done — every message, every timing decision, every word choice — into a repeatable system that anyone could follow.
-        </p>
-
+        <p class="reveal">I was stunned. Not because people gave — but because of <em>how many</em> people gave. People I hadn't spoken to in over a year. A former classmate. Someone from my old church. A colleague I helped with something small two years before. They all showed up.</p>
+        <p class="reveal">The money was never the problem. <strong>The approach was the problem.</strong></p>
+        <p class="reveal">I had been asking the wrong way, on the wrong platforms, with the wrong framing. The moment I changed the method, everything changed.</p>
+        <p class="reveal">I enrolled in that program. And afterwards, I spent months documenting exactly what I had done — every message, every timing decision, every word choice — into a repeatable system that anyone could follow.</p>
         <div class="story-pull reveal">
           <p>"That system is this course. And the only difference between where you are right now and where I was at the end of those 48 hours — is that you haven't started yet."</p>
         </div>
+        <p class="reveal" style="color: var(--emerald-bright); font-weight: 700; font-size: clamp(15px,1.6vw,18px);">The money is already around you. Let me show you exactly how to reach it.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <p class="reveal" style="color: var(--emerald-bright); font-weight: 700; font-size: clamp(15px,1.6vw,18px);">
-          The money is already around you. Let me show you exactly how to reach it.
-        </p>
+<!-- ═══ HOW IT WORKS ═══ -->
+<section id="how-it-works">
+  <div class="container-wide">
+    <div class="section-head reveal">
+      <div class="tag">Simple 3-Step Process</div>
+      <h2>How the System Works</h2>
+      <div class="divider"></div>
+      <p>No complexity. No tech skills needed. Just follow the steps.</p>
+    </div>
+    <div class="hiw-steps">
+      <div class="hiw-connector"></div>
+      <div class="hiw-step reveal">
+        <div class="hiw-icon">📱</div>
+        <div class="hiw-num">Step 1</div>
+        <div class="hiw-title">Identify Your 50 Warm Contacts</div>
+        <div class="hiw-desc">Scroll through your phone and use our framework to find 50 people who are likely to support you. Most people are shocked by how many they find.</div>
+      </div>
+      <div class="hiw-step reveal" style="transition-delay: 0.15s;">
+        <div class="hiw-icon">💬</div>
+        <div class="hiw-num">Step 2</div>
+        <div class="hiw-title">Send the Message Sequence</div>
+        <div class="hiw-desc">Follow our word-for-word WhatsApp templates. 5 messages sent in a specific order over 48 hours. Each one builds on the last.</div>
+      </div>
+      <div class="hiw-step reveal" style="transition-delay: 0.3s;">
+        <div class="hiw-icon">💰</div>
+        <div class="hiw-num">Step 3</div>
+        <div class="hiw-title">Watch the Money Come In</div>
+        <div class="hiw-desc">Track contributions with the included tracker. Most students reach their goal within 48 hours. Some even exceed it.</div>
       </div>
     </div>
   </div>
@@ -1475,9 +1333,9 @@
         <div class="pn" data-count="100" data-suffix="%">0%</div>
         <div class="pl">done with your phone</div>
       </div>
-      <div class="proof-item reveal" style="transition-delay: 0.3s;">
-        <div class="pn"><span class="cur-sym">₦</span>0</div>
-        <div class="pl">ad spend required</div>
+      <div class="proof-item live-counter reveal" style="transition-delay: 0.3s;">
+        <div class="pn" id="proof-enrolled">347+</div>
+        <div class="pl">students enrolled</div>
       </div>
     </div>
   </div>
@@ -1490,52 +1348,87 @@
       <div class="tag">What's Inside the Course</div>
       <h2>4 Modules. 13 Lessons.<br>One System That Actually Works.</h2>
       <div class="divider"></div>
-      <p>Every module builds on the last. By the time you reach Module 4, you have everything you need to go live with your campaign today.</p>
+      <p>Click any module to see the detailed lesson breakdown. Every module builds on the last.</p>
     </div>
     <div class="module-list">
-      <div class="module-card reveal">
-        <div class="module-num">1</div>
-        <div class="module-content">
-          <h3>The Money Mindset Shift</h3>
-          <p>Before you send anything, you need to understand something most people get completely wrong about asking for money. This module rewires how you think — and why that alone changes everything about your results.</p>
-          <div class="lessons">
-            <div class="lesson-pill">3 Lessons</div>
-            <div class="lesson-pill">Mindset + Strategy</div>
+      <div class="module-card reveal" onclick="toggleModule(this)">
+        <div class="module-header">
+          <div class="module-num">1</div>
+          <div class="module-content">
+            <h3>The Money Mindset Shift</h3>
+            <p>Before you send anything, you need to understand something most people get completely wrong about asking for money.</p>
+            <div class="lessons"><div class="lesson-pill">3 Lessons</div><div class="lesson-pill">Mindset + Strategy</div></div>
+          </div>
+          <div class="module-expand-icon">+</div>
+        </div>
+        <div class="module-details">
+          <div class="module-details-inner">
+            <div class="module-lesson-item"><div class="module-lesson-check">✓</div> Why most people feel awkward asking — and how to fix it in 10 minutes</div>
+            <div class="module-lesson-item"><div class="module-lesson-check">✓</div> The "contribution vs. begging" reframe that changes everything</div>
+            <div class="module-lesson-item"><div class="module-lesson-check">✓</div> How to set a realistic, achievable fundraising target</div>
           </div>
         </div>
       </div>
-      <div class="module-card reveal">
-        <div class="module-num">2</div>
-        <div class="module-content">
-          <h3>The Crowdfunding Principle</h3>
-          <p>This module shows you the exact same principle that funded some of the world's biggest companies — and how ordinary people have been quietly using it for decades. Once you see it, you'll never feel awkward asking again.</p>
-          <div class="lessons">
-            <div class="lesson-pill">2 Lessons</div>
-            <div class="lesson-pill">Psychology + Proof</div>
+
+      <div class="module-card reveal" onclick="toggleModule(this)">
+        <div class="module-header">
+          <div class="module-num">2</div>
+          <div class="module-content">
+            <h3>The Crowdfunding Principle</h3>
+            <p>This module shows you the exact same principle that funded some of the world's biggest companies — and how ordinary people use it.</p>
+            <div class="lessons"><div class="lesson-pill">2 Lessons</div><div class="lesson-pill">Psychology + Proof</div></div>
+          </div>
+          <div class="module-expand-icon">+</div>
+        </div>
+        <div class="module-details">
+          <div class="module-details-inner">
+            <div class="module-lesson-item"><div class="module-lesson-check">✓</div> The science behind why small asks outperform big ones</div>
+            <div class="module-lesson-item"><div class="module-lesson-check">✓</div> Real-world case studies of everyday crowdfunding success</div>
           </div>
         </div>
       </div>
-      <div class="module-card reveal">
-        <div class="module-num">3</div>
-        <div class="module-content">
-          <h3>What You Need to Get Started</h3>
-          <p>You don't need a website, paid ads, or any special tools. This module shows you the exact setup that makes the entire system work — and why most people overlook the one channel that outperforms everything else.</p>
-          <div class="lessons">
-            <div class="lesson-pill">3 Lessons</div>
-            <div class="lesson-pill">Setup + Tools</div>
+
+      <div class="module-card reveal" onclick="toggleModule(this)">
+        <div class="module-header">
+          <div class="module-num">3</div>
+          <div class="module-content">
+            <h3>What You Need to Get Started</h3>
+            <p>No website, no paid ads, no special tools. Just WhatsApp and your phone contacts.</p>
+            <div class="lessons"><div class="lesson-pill">3 Lessons</div><div class="lesson-pill">Setup + Tools</div></div>
+          </div>
+          <div class="module-expand-icon">+</div>
+        </div>
+        <div class="module-details">
+          <div class="module-details-inner">
+            <div class="module-lesson-item"><div class="module-lesson-check">✓</div> Setting up WhatsApp Broadcast for maximum reach</div>
+            <div class="module-lesson-item"><div class="module-lesson-check">✓</div> How to organize your contact list with the included tracker</div>
+            <div class="module-lesson-item"><div class="module-lesson-check">✓</div> Setting up Flutterwave or Paystack to receive payments</div>
           </div>
         </div>
       </div>
-      <div class="module-card core-module reveal">
-        <div class="module-num">4</div>
-        <div class="module-content">
-          <h3>The Fast Money System <span class="core-badge">CORE</span></h3>
-          <p>This is where you execute. A specific sequence of messages sent in a specific order over 48 hours — each one building on the last. You get every word written out for you, a voice note script, a step-by-step timeline, and a tracker. Follow it exactly and the results follow.</p>
-          <div class="lessons">
-            <div class="lesson-pill">5 Lessons</div>
-            <div class="lesson-pill">Full Execution Playbook</div>
-            <div class="lesson-pill">Word-for-Word Templates</div>
-            <div class="lesson-pill">48-Hour Timeline</div>
+
+      <div class="module-card core-module reveal" onclick="toggleModule(this)">
+        <div class="module-header">
+          <div class="module-num">4</div>
+          <div class="module-content">
+            <h3>The Fast Money System <span class="core-badge">CORE</span></h3>
+            <p>The full execution playbook. A specific sequence of messages sent in a specific order over 48 hours.</p>
+            <div class="lessons">
+              <div class="lesson-pill">5 Lessons</div>
+              <div class="lesson-pill">Full Execution Playbook</div>
+              <div class="lesson-pill">Word-for-Word Templates</div>
+              <div class="lesson-pill">48-Hour Timeline</div>
+            </div>
+          </div>
+          <div class="module-expand-icon">+</div>
+        </div>
+        <div class="module-details">
+          <div class="module-details-inner">
+            <div class="module-lesson-item"><div class="module-lesson-check">✓</div> Message 1: The Warm-Up (sent on Day 1 morning)</div>
+            <div class="module-lesson-item"><div class="module-lesson-check">✓</div> Message 2: The Ask (sent on Day 1 afternoon)</div>
+            <div class="module-lesson-item"><div class="module-lesson-check">✓</div> Message 3: The Voice Note Follow-Up (Day 1 evening)</div>
+            <div class="module-lesson-item"><div class="module-lesson-check">✓</div> Message 4: The Momentum Update (Day 2 morning)</div>
+            <div class="module-lesson-item"><div class="module-lesson-check">✓</div> Message 5: The Gratitude Close (Day 2 evening)</div>
           </div>
         </div>
       </div>
@@ -1545,7 +1438,7 @@
     <div class="bonus-card reveal">
       <div class="tag gold-tag">Bonus Included</div>
       <h3>📋 The Fast Money Execution Checklist</h3>
-      <p>A downloadable, printable workbook that keeps you on track from the moment you start your campaign to the moment you hit your goal. Every step laid out, every box to tick, every number to log. Works in all 14 supported countries with automatic currency adjustment.</p>
+      <p>A downloadable, printable workbook that keeps you on track from the moment you start your campaign to the moment you hit your goal. Every step laid out, every box to tick, every number to log.</p>
     </div>
   </div>
 </section>
@@ -1568,7 +1461,7 @@
   </div>
 </section>
 
-<!-- ═══ TESTIMONIALS ═══ -->
+<!-- ═══ TESTIMONIALS (WhatsApp Style) ═══ -->
 <section id="testimonials">
   <div class="container-wide">
     <div class="section-head reveal">
@@ -1578,35 +1471,85 @@
     </div>
     <div class="testi-grid">
       <div class="testi-card reveal">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-body">"I was skeptical because I'd tried asking people before and it was so awkward. But the sequence in this course is different. By the time I sent Message 4, three people had already asked ME how to send the money. I raised my goal in 31 hours."</div>
-        <div class="testi-result">Raised <span class="cur-sym">₦</span><span class="cur-r1">50,000</span> in 31 hours</div>
-        <div class="testi-author">
-          <div class="testi-avatar">A</div>
-          <div><div class="testi-name">Adaeze O.</div><div class="testi-loc">Lagos, Nigeria</div></div>
+        <div class="testi-wa-header">
+          <div class="testi-wa-avatar">A</div>
+          <div>
+            <div class="testi-wa-name">Adaeze O.</div>
+            <div class="testi-wa-status">Lagos, Nigeria</div>
+          </div>
+          <div class="testi-wa-verified">✓</div>
+        </div>
+        <div class="testi-chat-body">
+          <div class="testi-bubble">
+            <p>"I was skeptical because I'd tried asking people before and it was so awkward. But the sequence in this course is different. By the time I sent Message 4, three people had already asked ME how to send the money. I raised my goal in 31 hours."</p>
+            <div class="testi-bubble-time">10:32 AM <span class="wa-checks">✓✓</span></div>
+          </div>
+        </div>
+        <div class="testi-result-badge">Raised <span class="cur-sym">₦</span><span class="cur-r1">50,000</span> in 31 hours</div>
+        <div class="testi-stars-row">
+          <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
         </div>
       </div>
+
       <div class="testi-card reveal" style="transition-delay: 0.1s;">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-body">"The voice note was the game changer for me. I sent the text messages before and got low response. The moment I recorded my voice, people started responding within minutes. Something about hearing your voice makes it real."</div>
-        <div class="testi-result">Raised GH₵480 in 40 hours</div>
-        <div class="testi-author">
-          <div class="testi-avatar">K</div>
-          <div><div class="testi-name">Kwame A.</div><div class="testi-loc">Accra, Ghana</div></div>
+        <div class="testi-wa-header">
+          <div class="testi-wa-avatar">K</div>
+          <div>
+            <div class="testi-wa-name">Kwame A.</div>
+            <div class="testi-wa-status">Accra, Ghana</div>
+          </div>
+          <div class="testi-wa-verified">✓</div>
+        </div>
+        <div class="testi-chat-body">
+          <div class="testi-bubble">
+            <p>"The voice note was the game changer for me. I sent the text messages before and got low response. The moment I recorded my voice, people started responding within minutes. Something about hearing your voice makes it real."</p>
+            <div class="testi-bubble-time">2:15 PM <span class="wa-checks">✓✓</span></div>
+          </div>
+        </div>
+        <div class="testi-result-badge">Raised GH₵480 in 40 hours</div>
+        <div class="testi-stars-row">
+          <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
         </div>
       </div>
+
       <div class="testi-card reveal" style="transition-delay: 0.2s;">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-body">"I thought I needed rich connections. Turns out I just needed a strategy. I messaged 48 people. 27 of them contributed. People I hadn't spoken to in two years! This system actually works. Buy this course."</div>
-        <div class="testi-result">Raised KSh 14,500 in 48 hours</div>
-        <div class="testi-author">
-          <div class="testi-avatar">F</div>
-          <div><div class="testi-name">Fatuma M.</div><div class="testi-loc">Nairobi, Kenya</div></div>
+        <div class="testi-wa-header">
+          <div class="testi-wa-avatar">F</div>
+          <div>
+            <div class="testi-wa-name">Fatuma M.</div>
+            <div class="testi-wa-status">Nairobi, Kenya</div>
+          </div>
+          <div class="testi-wa-verified">✓</div>
+        </div>
+        <div class="testi-chat-body">
+          <div class="testi-bubble">
+            <p>"I thought I needed rich connections. Turns out I just needed a strategy. I messaged 48 people. 27 of them contributed. People I hadn't spoken to in two years! This system actually works. Buy this course."</p>
+            <div class="testi-bubble-time">6:48 PM <span class="wa-checks">✓✓</span></div>
+          </div>
+        </div>
+        <div class="testi-result-badge">Raised KSh 14,500 in 48 hours</div>
+        <div class="testi-stars-row">
+          <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ═══ TRUST BAR ═══ -->
+<div id="trust-bar">
+  <div class="container-wide">
+    <div class="trust-inner">
+      <div class="trust-label">Trusted Payments via</div>
+      <div class="trust-logos">
+        <div class="trust-logo"><span class="tl-icon">💳</span> Flutterwave</div>
+        <div class="trust-logo"><span class="tl-icon">🔒</span> Paystack</div>
+        <div class="trust-logo"><span class="tl-icon">📱</span> WhatsApp</div>
+        <div class="trust-logo"><span class="tl-icon">🏫</span> Digitstem</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ═══ VALUE STACK ═══ -->
 <section id="value">
@@ -1616,68 +1559,15 @@
       <h2>Everything You're Getting Today</h2>
     </div>
     <div class="value-list">
-      <div class="value-item reveal">
-        <div class="value-item-left">
-          <div class="value-check">✓</div>
-          <div class="value-item-name">The Fast Money Guide: Full Course (4 Modules, 13 Lessons)</div>
-        </div>
-        <div class="value-item-right">
-          <div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-reg">15,000</span></div>
-          <div class="value-item-inc">✓ Included</div>
-        </div>
-      </div>
-      <div class="value-item reveal">
-        <div class="value-item-left">
-          <div class="value-check">✓</div>
-          <div class="value-item-name">5 WhatsApp Message Templates (word-for-word, ready to send)</div>
-        </div>
-        <div class="value-item-right">
-          <div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-5k">5,000</span></div>
-          <div class="value-item-inc">✓ Included</div>
-        </div>
-      </div>
-      <div class="value-item reveal">
-        <div class="value-item-left">
-          <div class="value-check">✓</div>
-          <div class="value-item-name">Voice Note Script (exactly what to say in 60–90 seconds)</div>
-        </div>
-        <div class="value-item-right">
-          <div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-3k">3,000</span></div>
-          <div class="value-item-inc">✓ Included</div>
-        </div>
-      </div>
-      <div class="value-item reveal">
-        <div class="value-item-left">
-          <div class="value-check">✓</div>
-          <div class="value-item-name">The Execution Checklist (downloadable, printable workbook)</div>
-        </div>
-        <div class="value-item-right">
-          <div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-3k2">3,000</span></div>
-          <div class="value-item-inc">✓ Included</div>
-        </div>
-      </div>
-      <div class="value-item reveal">
-        <div class="value-item-left">
-          <div class="value-check">✓</div>
-          <div class="value-item-name">48-Hour Campaign Timeline &amp; Results Tracker</div>
-        </div>
-        <div class="value-item-right">
-          <div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-2k">2,000</span></div>
-          <div class="value-item-inc">✓ Included</div>
-        </div>
-      </div>
-      <div class="value-item reveal">
-        <div class="value-item-left">
-          <div class="value-check">✓</div>
-          <div class="value-item-name">Multi-country currency guide (14 countries via Flutterwave &amp; Paystack)</div>
-        </div>
-        <div class="value-item-right">
-          <div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-2k2">2,000</span></div>
-          <div class="value-item-inc">✓ Included</div>
-        </div>
-      </div>
+      <div class="value-item reveal"><div class="value-item-left"><div class="value-check">✓</div><div class="value-item-name">The Fast Money Guide: Full Course (4 Modules, 13 Lessons)</div></div><div class="value-item-right"><div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-reg">15,000</span></div><div class="value-item-inc">✓ Included</div></div></div>
+      <div class="value-item reveal"><div class="value-item-left"><div class="value-check">✓</div><div class="value-item-name">5 WhatsApp Message Templates (word-for-word, ready to send)</div></div><div class="value-item-right"><div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-5k">5,000</span></div><div class="value-item-inc">✓ Included</div></div></div>
+      <div class="value-item reveal"><div class="value-item-left"><div class="value-check">✓</div><div class="value-item-name">Voice Note Script (exactly what to say in 60–90 seconds)</div></div><div class="value-item-right"><div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-3k">3,000</span></div><div class="value-item-inc">✓ Included</div></div></div>
+      <div class="value-item reveal"><div class="value-item-left"><div class="value-check">✓</div><div class="value-item-name">The Execution Checklist (downloadable, printable workbook)</div></div><div class="value-item-right"><div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-3k2">3,000</span></div><div class="value-item-inc">✓ Included</div></div></div>
+      <div class="value-item reveal"><div class="value-item-left"><div class="value-check">✓</div><div class="value-item-name">48-Hour Campaign Timeline &amp; Results Tracker</div></div><div class="value-item-right"><div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-2k">2,000</span></div><div class="value-item-inc">✓ Included</div></div></div>
+      <div class="value-item reveal"><div class="value-item-left"><div class="value-check">✓</div><div class="value-item-name">Multi-country currency guide (14 countries via Flutterwave &amp; Paystack)</div></div><div class="value-item-right"><div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-2k2">2,000</span></div><div class="value-item-inc">✓ Included</div></div></div>
     </div>
     <div class="value-total reveal">
+      <div class="save-badge">SAVE 83%</div>
       <div class="vt-label">Total value</div>
       <div class="vt-right">
         <span class="vt-cross"><span class="cur-sym">₦</span><span class="cur-val-total">30,000</span></span>
@@ -1694,7 +1584,7 @@
       <div class="tag">Get Instant Access</div>
       <h2>One Payment. Lifetime Access.<br>Start Today.</h2>
     </div>
-    <div class="price-card reveal">
+    <div class="price-card reveal-scale">
       <div class="price-card-head">
         <div class="price-ribbon">BEST VALUE</div>
         <div class="pc-tag">The Fast Money Guide</div>
@@ -1702,6 +1592,16 @@
         <div class="pc-sub">Instant digital access · 14 countries supported</div>
       </div>
       <div class="price-card-body">
+        <div class="price-countdown">
+          <div class="price-countdown-label">⏰ Launch price expires in</div>
+          <div class="price-countdown-timer">
+            <div class="countdown-unit"><div class="countdown-num" id="cd-hours">23</div><div class="countdown-label">Hours</div></div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-unit"><div class="countdown-num" id="cd-mins">59</div><div class="countdown-label">Mins</div></div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-unit"><div class="countdown-num" id="cd-secs">59</div><div class="countdown-label">Secs</div></div>
+          </div>
+        </div>
         <div class="price-main">
           <div class="p-was">Regular price: <span class="cur-sym">₦</span><span class="cur-reg-price">15,000</span></div>
           <div class="p-now"><span class="p-cur cur-sym">₦</span><span class="cur-price">5,000</span></div>
@@ -1722,7 +1622,6 @@
       </div>
     </div>
 
-    <!-- Guarantee -->
     <div class="guarantee-box reveal">
       <div class="g-icon">🛡️</div>
       <div>
@@ -1742,45 +1641,27 @@
     </div>
     <div class="faq-list">
       <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          Do I need any special app or tool to do this?
-          <div class="faq-icon-wrap"><span class="faq-icon">+</span></div>
-        </button>
+        <button class="faq-q" onclick="toggleFaq(this)">Do I need any special app or tool to do this?<div class="faq-icon-wrap"><span class="faq-icon">+</span></div></button>
         <div class="faq-a">No. You only need WhatsApp, which you already have, and your phone. No paid tools, no website, no ads. That's the entire toolkit.</div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          What if I don't have many contacts on WhatsApp?
-          <div class="faq-icon-wrap"><span class="faq-icon">+</span></div>
-        </button>
+        <button class="faq-q" onclick="toggleFaq(this)">What if I don't have many contacts on WhatsApp?<div class="faq-icon-wrap"><span class="faq-icon">+</span></div></button>
         <div class="faq-a">You need 50 warm contacts, not 500. Most people underestimate how many warm contacts they have. The course includes a framework to identify them. If you've lived, gone to school, worked, or attended church or a mosque, you have enough contacts.</div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          Is this suitable for my country?
-          <div class="faq-icon-wrap"><span class="faq-icon">+</span></div>
-        </button>
+        <button class="faq-q" onclick="toggleFaq(this)">Is this suitable for my country?<div class="faq-icon-wrap"><span class="faq-icon">+</span></div></button>
         <div class="faq-a">Yes. The Fast Money Guide works in every country where Flutterwave or Paystack operates: Nigeria, Ghana, Kenya, Tanzania, Uganda, Rwanda, South Africa, Zambia, Cameroon, Ivory Coast, Egypt, the UK, the USA, and Europe. All currency amounts and payment platform examples adapt automatically when you select your country.</div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          What if people say no or don't respond?
-          <div class="faq-icon-wrap"><span class="faq-icon">+</span></div>
-        </button>
+        <button class="faq-q" onclick="toggleFaq(this)">What if people say no or don't respond?<div class="faq-icon-wrap"><span class="faq-icon">+</span></div></button>
         <div class="faq-a">Some people will. That's normal. The system is designed around this, which is why you contact 50 people instead of 5. Even if 50% say no, you still hit your goal. The sequence is built to maximize the number of yeses from your actual warm contacts.</div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          Can I use this more than once?
-          <div class="faq-icon-wrap"><span class="faq-icon">+</span></div>
-        </button>
+        <button class="faq-q" onclick="toggleFaq(this)">Can I use this more than once?<div class="faq-icon-wrap"><span class="faq-icon">+</span></div></button>
         <div class="faq-a">Yes, and that's one of the most valuable things about the system. Once you understand the principles and have the templates, you can run this campaign every time you need to raise money. Many students run it quarterly.</div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          How do I access the course after purchase?
-          <div class="faq-icon-wrap"><span class="faq-icon">+</span></div>
-        </button>
+        <button class="faq-q" onclick="toggleFaq(this)">How do I access the course after purchase?<div class="faq-icon-wrap"><span class="faq-icon">+</span></div></button>
         <div class="faq-a">You get instant digital access immediately after payment through Digitstem's marketplace. No waiting. No shipping. Log in and start within minutes of completing your purchase.</div>
       </div>
     </div>
@@ -1798,11 +1679,8 @@
       </a>
     </div>
     <div class="final-trust reveal">
-      <span>Instant access after payment</span>
-      <span>·</span>
-      <span>One-time payment</span>
-      <span>·</span>
-      <span>No subscription</span>
+      <span>Instant access after payment</span><span>·</span>
+      <span>One-time payment</span><span>·</span><span>No subscription</span>
     </div>
   </div>
 </section>
@@ -1819,6 +1697,17 @@
     Results may vary. Earnings depend on individual effort, contacts, and execution of the system.
   </div>
 </footer>
+
+<!-- ═══ STICKY MOBILE CTA ═══ -->
+<div id="sticky-cta">
+  <div class="sticky-cta-inner">
+    <div class="sticky-cta-price">
+      <div class="sticky-cta-was"><span class="cur-sym">₦</span><span class="cur-reg-price">15,000</span></div>
+      <div class="sticky-cta-now"><span class="cur-sym">₦</span><span class="cur-price">5,000</span></div>
+    </div>
+    <a href="https://digitstem.com/marketplace/fast-money-guide" class="sticky-cta-btn">Get Instant Access →</a>
+  </div>
+</div>
 
 <!-- ═══ COUNTRY FLOAT ═══ -->
 <div id="country-float">
@@ -1846,9 +1735,7 @@
 </div>
 
 <script>
-  /* ═══════════════════════════════════════════
-     CURRENCY SYSTEM (bug fixed — all prices now update)
-  ═══════════════════════════════════════════ */
+  /* ═══ CURRENCY SYSTEM ═══ */
   const currencies = {
     ng: { sym:'₦',    price:'5,000',   regPrice:'15,000',  goal:'50,000',  ask:'2,000',  r1:'50,000',  r2:'100,000',  v1:'15,000', v2:'5,000', v3:'3,000', v4:'3,000', v5:'2,000', v6:'2,000', vt:'30,000' },
     gh: { sym:'GH₵',  price:'50',      regPrice:'150',     goal:'500',     ask:'20',     r1:'500',     r2:'1,000',    v1:'150',    v2:'50',    v3:'30',    v4:'30',    v5:'20',    v6:'20',    vt:'300' },
@@ -1876,7 +1763,6 @@
     document.querySelectorAll('.cur-ask').forEach(el => el.textContent = c.ask);
     document.querySelectorAll('.cur-r1').forEach(el => el.textContent = c.r1);
     document.querySelectorAll('.cur-r2').forEach(el => el.textContent = c.r2);
-    // Value stack
     document.querySelectorAll('.cur-val-reg').forEach(el => el.textContent = c.v1);
     document.querySelectorAll('.cur-val-5k').forEach(el => el.textContent = c.v2);
     document.querySelectorAll('.cur-val-3k').forEach(el => el.textContent = c.v3);
@@ -1888,25 +1774,23 @@
     localStorage.setItem('fmg_country', code);
   }
 
-  /* ═══════════════════════════════════════════
-     FAQ ACCORDION (smooth height animation)
-  ═══════════════════════════════════════════ */
+  /* ═══ FAQ ACCORDION ═══ */
   function toggleFaq(btn) {
     const answer = btn.nextElementSibling;
     const isOpen = answer.classList.contains('open');
-    // Close all
     document.querySelectorAll('.faq-a.open').forEach(a => a.classList.remove('open'));
     document.querySelectorAll('.faq-q.open').forEach(b => b.classList.remove('open'));
-    // Open clicked if it was closed
-    if (!isOpen) {
-      answer.classList.add('open');
-      btn.classList.add('open');
-    }
+    if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
   }
 
-  /* ═══════════════════════════════════════════
-     SCROLL REVEAL (IntersectionObserver)
-  ═══════════════════════════════════════════ */
+  /* ═══ MODULE ACCORDION ═══ */
+  function toggleModule(card) {
+    const wasExpanded = card.classList.contains('expanded');
+    document.querySelectorAll('.module-card.expanded').forEach(c => c.classList.remove('expanded'));
+    if (!wasExpanded) card.classList.add('expanded');
+  }
+
+  /* ═══ SCROLL REVEAL ═══ */
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1915,14 +1799,11 @@
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
     revealObserver.observe(el);
   });
 
-  /* ═══════════════════════════════════════════
-     ANIMATED COUNTERS
-  ═══════════════════════════════════════════ */
+  /* ═══ ANIMATED COUNTERS ═══ */
   const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1935,90 +1816,179 @@
         const increment = target / (duration / 16);
         const timer = setInterval(() => {
           current += increment;
-          if (current >= target) {
-            current = target;
-            clearInterval(timer);
-          }
+          if (current >= target) { current = target; clearInterval(timer); }
           el.textContent = Math.floor(current) + suffix;
         }, 16);
         counterObserver.unobserve(el);
       }
     });
   }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
 
-  document.querySelectorAll('[data-count]').forEach(el => {
-    counterObserver.observe(el);
-  });
-
-  /* ═══════════════════════════════════════════
-     SOCIAL PROOF NOTIFICATIONS
-  ═══════════════════════════════════════════ */
+  /* ═══ SOCIAL PROOF NOTIFICATIONS ═══ */
   const buyers = [
-    { name:'Amaka',      country:'Lagos, Nigeria',         initial:'A', ago:'just now' },
-    { name:'Chidi',      country:'Enugu, Nigeria',         initial:'C', ago:'1 minute ago' },
-    { name:'Sade',       country:'Abuja, Nigeria',         initial:'S', ago:'2 minutes ago' },
-    { name:'Emeka',      country:'Port Harcourt, Nigeria', initial:'E', ago:'just now' },
-    { name:'Ngozi',      country:'Onitsha, Nigeria',       initial:'N', ago:'3 minutes ago' },
-    { name:'Kwame',      country:'Accra, Ghana',           initial:'K', ago:'1 minute ago' },
-    { name:'Abena',      country:'Kumasi, Ghana',          initial:'A', ago:'2 minutes ago' },
-    { name:'Fatuma',     country:'Nairobi, Kenya',         initial:'F', ago:'just now' },
-    { name:'Brian',      country:'Mombasa, Kenya',         initial:'B', ago:'4 minutes ago' },
-    { name:'Amina',      country:'Dar es Salaam, Tanzania',initial:'A', ago:'just now' },
-    { name:'Joseph',     country:'Arusha, Tanzania',       initial:'J', ago:'2 minutes ago' },
-    { name:'Stella',     country:'Kampala, Uganda',        initial:'S', ago:'1 minute ago' },
-    { name:'Ronald',     country:'Entebbe, Uganda',        initial:'R', ago:'3 minutes ago' },
-    { name:'Jean-Claude',country:'Kigali, Rwanda',         initial:'J', ago:'just now' },
-    { name:'Claudine',   country:'Kigali, Rwanda',         initial:'C', ago:'2 minutes ago' },
-    { name:'Thandiwe',   country:'Johannesburg, S. Africa',initial:'T', ago:'1 minute ago' },
-    { name:'Lerato',     country:'Cape Town, S. Africa',   initial:'L', ago:'2 minutes ago' },
-    { name:'Sipho',      country:'Durban, S. Africa',      initial:'S', ago:'just now' },
-    { name:'Mwamba',     country:'Lusaka, Zambia',         initial:'M', ago:'just now' },
-    { name:'Chanceline', country:'Douala, Cameroon',       initial:'C', ago:'3 minutes ago' },
-    { name:'Aya',        country:'Abidjan, Ivory Coast',   initial:'A', ago:'1 minute ago' },
-    { name:'Koffi',      country:'Abidjan, Ivory Coast',   initial:'K', ago:'just now' },
-    { name:'Mohamed',    country:'Cairo, Egypt',           initial:'M', ago:'2 minutes ago' },
-    { name:'Nour',       country:'Alexandria, Egypt',      initial:'N', ago:'4 minutes ago' },
-    { name:'David',      country:'London, UK',             initial:'D', ago:'just now' },
-    { name:'Chisom',     country:'Manchester, UK',         initial:'C', ago:'1 minute ago' },
-    { name:'Marcus',     country:'Atlanta, USA',           initial:'M', ago:'2 minutes ago' },
-    { name:'Tolu',       country:'Houston, USA',           initial:'T', ago:'just now' },
-    { name:'Sophie',     country:'Paris, France',          initial:'S', ago:'3 minutes ago' },
-    { name:'Precious',   country:'Warri, Nigeria',         initial:'P', ago:'1 minute ago' },
-    { name:'Adaeze',     country:'Owerri, Nigeria',        initial:'A', ago:'just now' },
-    { name:'Kofi',       country:'Takoradi, Ghana',        initial:'K', ago:'5 minutes ago' },
-    { name:'Ifeoma',     country:'Ibadan, Nigeria',        initial:'I', ago:'2 minutes ago' },
-    { name:'Tunde',      country:'Lagos, Nigeria',         initial:'T', ago:'just now' },
-    { name:'Wanjiru',    country:'Nairobi, Kenya',         initial:'W', ago:'3 minutes ago' },
+    { name:'Amaka', country:'Lagos, Nigeria', initial:'A', ago:'just now' },
+    { name:'Chidi', country:'Enugu, Nigeria', initial:'C', ago:'1 minute ago' },
+    { name:'Sade', country:'Abuja, Nigeria', initial:'S', ago:'2 minutes ago' },
+    { name:'Emeka', country:'Port Harcourt, Nigeria', initial:'E', ago:'just now' },
+    { name:'Ngozi', country:'Onitsha, Nigeria', initial:'N', ago:'3 minutes ago' },
+    { name:'Kwame', country:'Accra, Ghana', initial:'K', ago:'1 minute ago' },
+    { name:'Abena', country:'Kumasi, Ghana', initial:'A', ago:'2 minutes ago' },
+    { name:'Fatuma', country:'Nairobi, Kenya', initial:'F', ago:'just now' },
+    { name:'Brian', country:'Mombasa, Kenya', initial:'B', ago:'4 minutes ago' },
+    { name:'Amina', country:'Dar es Salaam, Tanzania', initial:'A', ago:'just now' },
+    { name:'Joseph', country:'Arusha, Tanzania', initial:'J', ago:'2 minutes ago' },
+    { name:'Stella', country:'Kampala, Uganda', initial:'S', ago:'1 minute ago' },
+    { name:'Ronald', country:'Entebbe, Uganda', initial:'R', ago:'3 minutes ago' },
+    { name:'Jean-Claude', country:'Kigali, Rwanda', initial:'J', ago:'just now' },
+    { name:'Thandiwe', country:'Johannesburg, S. Africa', initial:'T', ago:'1 minute ago' },
+    { name:'Lerato', country:'Cape Town, S. Africa', initial:'L', ago:'2 minutes ago' },
+    { name:'Mwamba', country:'Lusaka, Zambia', initial:'M', ago:'just now' },
+    { name:'Chanceline', country:'Douala, Cameroon', initial:'C', ago:'3 minutes ago' },
+    { name:'Aya', country:'Abidjan, Ivory Coast', initial:'A', ago:'1 minute ago' },
+    { name:'Mohamed', country:'Cairo, Egypt', initial:'M', ago:'2 minutes ago' },
+    { name:'David', country:'London, UK', initial:'D', ago:'just now' },
+    { name:'Marcus', country:'Atlanta, USA', initial:'M', ago:'2 minutes ago' },
+    { name:'Tolu', country:'Houston, USA', initial:'T', ago:'just now' },
+    { name:'Sophie', country:'Paris, France', initial:'S', ago:'3 minutes ago' },
+    { name:'Precious', country:'Warri, Nigeria', initial:'P', ago:'1 minute ago' },
+    { name:'Ifeoma', country:'Ibadan, Nigeria', initial:'I', ago:'2 minutes ago' },
+    { name:'Tunde', country:'Lagos, Nigeria', initial:'T', ago:'just now' },
+    { name:'Wanjiru', country:'Nairobi, Kenya', initial:'W', ago:'3 minutes ago' },
   ];
-
   let toastIdx = Math.floor(Math.random() * buyers.length);
   let toastTimer = null;
-
   function showToast() {
-    const b = buyers[toastIdx % buyers.length];
-    toastIdx++;
-    document.getElementById('sp-av').textContent   = b.initial;
+    const b = buyers[toastIdx % buyers.length]; toastIdx++;
+    document.getElementById('sp-av').textContent = b.initial;
     document.getElementById('sp-name').textContent = b.name + ' from ' + b.country;
     document.getElementById('sp-time').textContent = b.ago;
-    const toast = document.getElementById('sp-toast');
-    toast.classList.add('visible');
+    document.getElementById('sp-toast').classList.add('visible');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(hideToast, 6000);
   }
+  function hideToast() { document.getElementById('sp-toast').classList.remove('visible'); }
+  setTimeout(() => { showToast(); setInterval(showToast, 60000); }, 8000);
 
-  function hideToast() {
-    document.getElementById('sp-toast').classList.remove('visible');
+  /* ═══ COUNTDOWN TIMER (evergreen 24h) ═══ */
+  function initCountdown() {
+    let stored = localStorage.getItem('fmg_cd_end');
+    let endTime;
+    if (stored && parseInt(stored) > Date.now()) {
+      endTime = parseInt(stored);
+    } else {
+      endTime = Date.now() + 24 * 60 * 60 * 1000;
+      localStorage.setItem('fmg_cd_end', endTime);
+    }
+    function updateCD() {
+      const diff = Math.max(0, endTime - Date.now());
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      const pad = n => String(n).padStart(2, '0');
+      document.getElementById('cd-hours').textContent = pad(h);
+      document.getElementById('cd-mins').textContent = pad(m);
+      document.getElementById('cd-secs').textContent = pad(s);
+      document.getElementById('ann-cd').textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
+      if (diff <= 0) {
+        endTime = Date.now() + 24 * 60 * 60 * 1000;
+        localStorage.setItem('fmg_cd_end', endTime);
+      }
+    }
+    updateCD();
+    setInterval(updateCD, 1000);
+  }
+  initCountdown();
+
+  /* ═══ LIVE STUDENT COUNTER ═══ */
+  let enrolledCount = 347;
+  function incrementEnrolled() {
+    enrolledCount += Math.floor(Math.random() * 2) + 1;
+    document.getElementById('live-count').textContent = enrolledCount;
+    document.getElementById('proof-enrolled').textContent = enrolledCount + '+';
+  }
+  setInterval(incrementEnrolled, 45000 + Math.random() * 30000);
+
+  /* ═══ PROGRESS BAR ═══ */
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const percent = Math.min((scrollTop / docHeight) * 100, 100);
+    document.getElementById('progress-bar').style.width = percent + '%';
+  });
+
+  /* ═══ STICKY MOBILE CTA ═══ */
+  const stickyCta = document.getElementById('sticky-cta');
+  const heroSection = document.getElementById('hero');
+  if (stickyCta) {
+    window.addEventListener('scroll', () => {
+      const heroBottom = heroSection.getBoundingClientRect().bottom;
+      if (heroBottom < 0) {
+        stickyCta.classList.add('visible');
+      } else {
+        stickyCta.classList.remove('visible');
+      }
+    });
   }
 
-  // First notification after 8 seconds, then every 60 seconds
-  setTimeout(() => {
-    showToast();
-    setInterval(showToast, 60000);
-  }, 8000);
+  /* ═══ EXIT INTENT POPUP ═══ */
+  let exitShown = false;
+  document.addEventListener('mouseout', (e) => {
+    if (exitShown) return;
+    if (e.clientY < 5 && e.relatedTarget === null) {
+      document.getElementById('exit-popup').classList.add('visible');
+      exitShown = true;
+    }
+  });
+  function closeExitPopup() {
+    document.getElementById('exit-popup').classList.remove('visible');
+  }
 
-  /* ═══════════════════════════════════════════
-     INIT
-  ═══════════════════════════════════════════ */
+  /* ═══ HERO PARTICLES ═══ */
+  (function initParticles() {
+    const canvas = document.getElementById('particles-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const PARTICLE_COUNT = 40;
+
+    function resize() {
+      const hero = document.getElementById('hero');
+      canvas.width = hero.offsetWidth;
+      canvas.height = hero.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2 + 0.5,
+        dx: (Math.random() - 0.5) * 0.4,
+        dy: (Math.random() - 0.5) * 0.3,
+        opacity: Math.random() * 0.3 + 0.1,
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(16, 185, 129, ${p.opacity})`;
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  /* ═══ INIT ═══ */
   const saved = localStorage.getItem('fmg_country') || 'ng';
   document.getElementById('country-sel').value = saved;
   setCountry(saved);
