@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Fast Money Guide: Raise ₦50,000 in 48 Hours Using WhatsApp</title>
+  <meta name="description" content="A step-by-step course that shows you exactly how to raise money for any program in less than 48 hours using only your phone and WhatsApp Broadcast." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ═══════════════════════════════════════════
+       DESIGN SYSTEM — CSS CUSTOM PROPERTIES
+    ═══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      /* ─ Palette ─ */
+      --bg-deep:    #060B18;
+      --bg-base:    #0A0E1A;
+      --bg-card:    #0F1424;
+      --bg-card2:   #141A2E;
+      --bg-card3:   #1A2038;
+      --border:     #1E2740;
+      --border2:    #283350;
+      --emerald:    #10B981;
+      --emerald-bright: #34D399;
+      --emerald-dark:   #059669;
+      --emerald-glow:   rgba(16,185,129,0.12);
+      --emerald-glow2:  rgba(16,185,129,0.06);
+      --gold:       #F7C948;
+      --gold-dark:  #D4A017;
+      --gold-glow:  rgba(247,201,72,0.12);
+      --red:        #F87171;
+      --red-soft:   rgba(248,113,113,0.1);
+      --text:       #F1F5F9;
+      --text-soft:  #CBD5E1;
+      --text-muted: #64748B;
+      --text-dim:   #475569;
+      /* ─ Gradients ─ */
+      --grad-emerald:  linear-gradient(135deg, #10B981 0%, #059669 100%);
+      --grad-gold:     linear-gradient(135deg, #F7C948 0%, #D4A017 100%);
+      --grad-hero:     radial-gradient(ellipse 100% 70% at 50% -5%, rgba(16,185,129,0.10) 0%, rgba(6,11,24,0) 70%);
+      --grad-section:  radial-gradient(ellipse 80% 40% at 50% 0%, rgba(16,185,129,0.04) 0%, transparent 70%);
+      --grad-glass:    linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+      /* ─ Glass ─ */
+      --glass-bg:      rgba(15,20,36,0.7);
+      --glass-border:  rgba(255,255,255,0.06);
+      --glass-blur:    blur(20px);
+      /* ─ Shadows ─ */
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.4);
+      --shadow-glow: 0 0 40px rgba(16,185,129,0.15);
+      /* ─ Radius ─ */
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      /* ─ Timing ─ */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-deep);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* ── Noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 9999;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 128px 128px;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ═══════════════════════════════════════════
+       UTILITIES
+    ═══════════════════════════════════════════ */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+    .container-wide { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .green { color: var(--emerald); }
+    .gold  { color: var(--gold); }
+    .red   { color: var(--red); }
+    em { font-style: normal; color: var(--emerald-bright); font-weight: 700; }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── Tags ── */
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--emerald);
+      background: var(--emerald-glow);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 100px;
+      padding: 6px 16px;
+      margin-bottom: 20px;
+    }
+    .tag.gold-tag {
+      color: var(--gold);
+      background: var(--gold-glow);
+      border-color: rgba(247,201,72,0.25);
+    }
+
+    /* ── Section Headings ── */
+    .section-head { text-align: center; margin-bottom: 56px; }
+    .section-head h2 {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.12;
+      margin-bottom: 16px;
+    }
+    .section-head p {
+      font-size: clamp(15px, 1.5vw, 19px);
+      color: var(--text-soft);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+    .divider {
+      width: 56px; height: 4px;
+      background: var(--grad-emerald);
+      border-radius: 4px;
+      margin: 18px auto;
+    }
+
+    /* ── Sections ── */
+    section { padding: 88px 0; position: relative; }
+
+    /* ═══════════════════════════════════════════
+       ANNOUNCEMENT BAR
+    ═══════════════════════════════════════════ */
+    .ann-bar {
+      background: var(--grad-emerald);
+      color: #000;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 11px 20px;
+      letter-spacing: 0.3px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ann-bar::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+      animation: ann-shimmer 3s ease-in-out infinite;
+    }
+    @keyframes ann-shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    .ann-bar span { opacity: 0.5; margin: 0 8px; }
+    .ann-bar-text { position: relative; z-index: 1; }
+
+    /* ═══════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════ */
+    nav {
+      background: rgba(6,11,24,0.85);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .nav-logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px; font-weight: 900;
+      color: var(--emerald);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .nav-cta {
+      background: var(--emerald);
+      color: #000;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 10px 24px;
+      border-radius: 100px;
+      letter-spacing: 0.2px;
+      transition: all 0.3s var(--ease-out);
+      box-shadow: 0 2px 12px rgba(16,185,129,0.2);
+    }
+    .nav-cta:hover {
+      background: var(--emerald-bright);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(16,185,129,0.35);
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    #hero {
+      padding: 100px 0 88px;
+      background: var(--grad-hero);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Decorative orb */
+    #hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: hero-pulse 6s ease-in-out infinite;
+    }
+    @keyframes hero-pulse {
+      0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+      50% { opacity: 0.6; transform: translateX(-50%) scale(1.15); }
+    }
+    #hero .pre-head {
+      font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--emerald); margin-bottom: 24px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      position: relative; z-index: 1;
+    }
+    #hero .pre-head::before,
+    #hero .pre-head::after {
+      content: ''; flex: 0 0 48px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(16,185,129,0.5));
+    }
+    #hero .pre-head::after {
+      background: linear-gradient(90deg, rgba(16,185,129,0.5), transparent);
+    }
+    #hero h1 {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 28px;
+      max-width: 840px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative; z-index: 1;
+    }
+    #hero h1 em {
+      background: linear-gradient(135deg, var(--emerald-bright), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    #hero .hero-sub {
+      font-size: clamp(16px, 2vw, 21px);
+      color: var(--text-soft);
+      max-width: 620px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      position: relative; z-index: 1;
+    }
+
+    /* ── Hero CTA ── */
+    .hero-cta-group {
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+      position: relative; z-index: 1;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--emerald);
+      color: #000;
+      font-weight: 900;
+      font-size: 18px;
+      padding: 18px 52px;
+      border-radius: 100px;
+      letter-spacing: 0.2px;
+      transition: all 0.3s var(--ease-out);
+      border: none; cursor: pointer;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(16,185,129,0.25);
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      transform: translateX(-100%);
+      transition: none;
+    }
+    .btn-primary:hover {
+      background: var(--emerald-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 40px rgba(16,185,129,0.4);
+    }
+    .btn-primary:hover::before {
+      animation: btn-shimmer 0.6s ease-out;
+    }
+    @keyframes btn-shimmer {
+      100% { transform: translateX(100%); }
+    }
+    .btn-ghost {
+      display: inline-block;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--text); }
+
+    /* ── Hero floating badges ── */
+    .hero-badges {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      position: relative; z-index: 1;
+    }
+    .hero-badge {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-soft);
+      transition: all 0.3s;
+    }
+    .hero-badge:hover {
+      border-color: rgba(16,185,129,0.3);
+      transform: translateY(-2px);
+    }
+    .hero-badge .badge-icon { font-size: 15px; }
+
+    /* ═══════════════════════════════════════════
+       PAIN SECTION
+    ═══════════════════════════════════════════ */
+    #pain {
+      background: var(--bg-base);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    #pain::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 200px;
+      background: var(--grad-section);
+      pointer-events: none;
+    }
+    #pain h2 {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: clamp(26px, 3.5vw, 44px);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      margin-bottom: 36px;
+    }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 24px;
+    }
+    .pain-col { display: flex; flex-direction: column; gap: 0; }
+    .pain-col-head {
+      font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      padding: 12px 20px;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+    .pain-col-head.problems {
+      color: var(--red);
+      background: var(--red-soft);
+      border: 1px solid rgba(248,113,113,0.15);
+      border-bottom: none;
+    }
+    .pain-col-head.solutions {
+      color: var(--emerald);
+      background: var(--emerald-glow);
+      border: 1px solid rgba(16,185,129,0.15);
+      border-bottom: none;
+    }
+    .pain-col-body {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 0 0 var(--radius-md) var(--radius-md);
+      padding: 4px 0;
+      flex: 1;
+    }
+    .pain-col-body.problems-body { border-color: rgba(248,113,113,0.12); }
+    .pain-col-body.solutions-body { border-color: rgba(16,185,129,0.12); }
+    .pain-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 20px;
+      font-size: clamp(14px, 1.4vw, 16px);
+      color: var(--text-soft);
+      line-height: 1.5;
+      border-bottom: 1px solid var(--border);
+    }
+    .pain-item:last-child { border-bottom: none; }
+    .pain-icon {
+      flex-shrink: 0; margin-top: 1px;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 900;
+    }
+    .pain-icon.bad {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+    .pain-icon.good {
+      background: var(--emerald-glow);
+      color: var(--emerald);
+    }
+
+    /* ═══════════════════════════════════════════
+       STORY SECTION
+    ═══════════════════════════════════════════ */
+    #story {
+      background: var(--bg-deep);
+      position: relative;
+      overflow: hidden;
+    }
+    #story::before {
+      content: '"';
+      position: absolute;
+      top: -40px; left: 10%;
+      font-size: 320px;
+      font-weight: 900;
+      color: rgba(16,185,129,0.03);
+      line-height: 1;
+      font-family: Georgia, serif;
+      pointer-events: none;
+    }
+    .story-inner { max-width: 720px; margin: 0 auto; position: relative; }
+    /* Timeline line */
+    .story-inner::before {
+      content: '';
+      position: absolute;
+      top: 80px; bottom: 0; left: -40px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--emerald) 0%, rgba(16,185,129,0.1) 100%);
+    }
+    .story-body { position: relative; z-index: 1; }
+    .story-body p {
+      font-size: clamp(16px, 1.8vw, 20px);
+      line-height: 1.85;
+      color: var(--text-soft);
+      margin-bottom: 24px;
+    }
+    .story-body p:last-child { margin-bottom: 0; }
+    .story-body strong { color: #fff; font-weight: 700; }
+    .story-body em { font-style: normal; color: var(--emerald-bright); font-weight: 700; }
+    .story-pull {
+      border-left: 4px solid var(--emerald);
+      padding: 22px 28px;
+      margin: 36px 0;
+      background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(16,185,129,0.02) 100%);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      backdrop-filter: blur(8px);
+    }
+    .story-pull p {
+      font-size: clamp(18px, 2vw, 24px) !important;
+      font-weight: 700;
+      color: #fff !important;
+      line-height: 1.5 !important;
+      margin: 0 !important;
+    }
+    .story-divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(to right, rgba(16,185,129,0.4), transparent);
+      margin: 44px 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       PROOF BAR
+    ═══════════════════════════════════════════ */
+    #proof-bar {
+      background: var(--bg-base);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 0;
+      position: relative;
+    }
+    .proof-numbers {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .proof-item {
+      text-align: center;
+      padding: 20px 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      flex: 1;
+      min-width: 160px;
+      transition: all 0.3s;
+    }
+    .proof-item:hover {
+      border-color: rgba(16,185,129,0.3);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-glow);
+    }
+    .proof-item .pn {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(30px, 4vw, 50px);
+      font-weight: 900;
+      color: var(--emerald);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+    .proof-item .pl {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════
+       MODULES / WHAT'S INSIDE
+    ═══════════════════════════════════════════ */
+    #what-you-get {
+      background: var(--bg-deep);
+      position: relative;
+    }
+    #what-you-get::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 300px;
+      background: var(--grad-section);
+      pointer-events: none;
+    }
+    .module-list { display: flex; flex-direction: column; gap: 16px; }
+    .module-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      transition: all 0.4s var(--ease-out);
+      position: relative;
+      overflow: hidden;
+    }
+    .module-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; bottom: 0;
+      width: 3px;
+      background: var(--emerald);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .module-card:hover {
+      border-color: rgba(16,185,129,0.3);
+      transform: translateX(4px);
+      box-shadow: -4px 0 20px rgba(16,185,129,0.08);
+    }
+    .module-card:hover::before { opacity: 1; }
+    .module-card.core-module {
+      border-color: rgba(16,185,129,0.35);
+      background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, var(--bg-card) 60%);
+    }
+    .module-card.core-module::before { opacity: 1; background: var(--gold); }
+    .module-num {
+      flex-shrink: 0;
+      width: 48px; height: 48px;
+      border-radius: var(--radius-sm);
+      background: var(--emerald-glow);
+      border: 2px solid rgba(16,185,129,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px; font-weight: 900; color: var(--emerald);
+      transition: all 0.3s;
+    }
+    .module-card:hover .module-num {
+      background: var(--emerald);
+      color: #000;
+      border-color: var(--emerald);
+    }
+    .core-module .module-num {
+      background: var(--gold) !important;
+      color: #000 !important;
+      border-color: var(--gold) !important;
+    }
+    .module-content h3 {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: clamp(16px, 1.6vw, 20px);
+      font-weight: 800;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .module-content p {
+      font-size: clamp(13px, 1.2vw, 15px);
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .module-content .lessons {
+      margin-top: 14px;
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .lesson-pill {
+      font-size: 11px; font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 4px 14px;
+      transition: all 0.2s;
+    }
+    .module-card:hover .lesson-pill {
+      border-color: rgba(16,185,129,0.2);
+      color: var(--text-soft);
+    }
+    .core-badge {
+      font-size: 10px; font-weight: 800;
+      color: var(--gold);
+      background: var(--gold-glow);
+      border: 1px solid rgba(247,201,72,0.3);
+      border-radius: 100px;
+      padding: 2px 10px;
+      margin-left: 10px;
+      letter-spacing: 1px;
+    }
+
+    /* ── Bonus ── */
+    .bonus-card {
+      margin-top: 24px;
+      background: linear-gradient(135deg, rgba(247,201,72,0.04) 0%, var(--bg-card) 60%);
+      border: 1px solid rgba(247,201,72,0.2);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .bonus-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; bottom: 0;
+      width: 3px;
+      background: var(--gold);
+    }
+    .bonus-card h3 {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: clamp(17px, 2vw, 22px);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .bonus-card p {
+      font-size: clamp(13px, 1.2vw, 16px);
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ═══════════════════════════════════════════
+       WHO IT'S FOR
+    ═══════════════════════════════════════════ */
+    #for-who {
+      background: var(--bg-base);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .forwho-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .forwho-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: all 0.3s var(--ease-out);
+    }
+    .forwho-card:hover {
+      border-color: rgba(16,185,129,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .forwho-card .fw-icon {
+      font-size: 24px; flex-shrink: 0; margin-top: 2px;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--emerald-glow);
+      border-radius: var(--radius-sm);
+    }
+    .forwho-card p {
+      font-size: clamp(13px, 1.2vw, 15px);
+      color: var(--text-soft);
+      line-height: 1.55;
+    }
+
+    /* ═══════════════════════════════════════════
+       TESTIMONIALS
+    ═══════════════════════════════════════════ */
+    #testimonials { background: var(--bg-deep); }
+    .testi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+    .testi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: all 0.4s var(--ease-out);
+      position: relative;
+      overflow: hidden;
+    }
+    .testi-card::before {
+      content: '"';
+      position: absolute;
+      top: -10px; right: 16px;
+      font-size: 120px;
+      font-weight: 900;
+      color: rgba(16,185,129,0.04);
+      font-family: Georgia, serif;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .testi-card:hover {
+      border-color: rgba(16,185,129,0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.25), var(--shadow-glow);
+    }
+    .testi-stars {
+      color: var(--gold);
+      font-size: 15px;
+      letter-spacing: 3px;
+    }
+    .testi-body {
+      font-size: clamp(13px, 1.2vw, 15px);
+      color: var(--text-soft);
+      line-height: 1.7;
+      flex: 1;
+    }
+    .testi-result {
+      background: var(--emerald-glow);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 13px; font-weight: 700;
+      color: var(--emerald);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .testi-result::before {
+      content: '✓';
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--emerald);
+      color: #000;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 900;
+      flex-shrink: 0;
+    }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--emerald-glow), rgba(16,185,129,0.2));
+      border: 2px solid rgba(16,185,129,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800; color: var(--emerald);
+    }
+    .testi-name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .testi-loc  { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+
+    /* ═══════════════════════════════════════════
+       VALUE STACK
+    ═══════════════════════════════════════════ */
+    #value {
+      background: var(--bg-base);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .value-list { display: flex; flex-direction: column; gap: 0; }
+    .value-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      gap: 16px;
+      transition: background 0.2s;
+    }
+    .value-item:hover { background: rgba(16,185,129,0.02); }
+    .value-item:last-child { border-bottom: none; }
+    .value-item-left {
+      display: flex; align-items: center; gap: 14px;
+      flex: 1;
+    }
+    .value-check {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--emerald);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 900; color: #000;
+      flex-shrink: 0;
+    }
+    .value-item-name {
+      font-size: clamp(14px, 1.3vw, 16px);
+      color: var(--text-soft);
+    }
+    .value-item-right {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .value-item-strike {
+      font-size: 14px;
+      color: var(--text-dim);
+      text-decoration: line-through;
+      white-space: nowrap;
+    }
+    .value-item-inc {
+      font-size: 13px; font-weight: 700;
+      color: var(--emerald);
+      white-space: nowrap;
+    }
+    .value-total {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(16,185,129,0.02) 100%);
+      border: 1px solid rgba(16,185,129,0.25);
+      border-radius: var(--radius-md);
+      padding: 22px 28px;
+    }
+    .value-total .vt-label {
+      font-size: 15px; color: var(--text-muted); font-weight: 600;
+    }
+    .value-total .vt-right {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .value-total .vt-cross {
+      font-size: 15px; color: var(--text-dim);
+      text-decoration: line-through;
+    }
+    .value-total .vt-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 900;
+      color: var(--emerald);
+    }
+
+    /* ═══════════════════════════════════════════
+       PRICING
+    ═══════════════════════════════════════════ */
+    #pricing {
+      background: var(--bg-deep);
+      position: relative;
+      overflow: hidden;
+    }
+    #pricing::before {
+      content: '';
+      position: absolute;
+      width: 800px; height: 800px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .price-card {
+      max-width: 580px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.4), 0 0 60px rgba(16,185,129,0.08);
+    }
+    /* Animated gradient border */
+    .price-card::before {
+      content: '';
+      position: absolute; inset: -2px;
+      border-radius: calc(var(--radius-xl) + 2px);
+      background: conic-gradient(from 0deg, var(--emerald), var(--gold), var(--emerald-bright), var(--emerald));
+      z-index: -1;
+      animation: border-spin 4s linear infinite;
+    }
+    @keyframes border-spin {
+      100% { transform: rotate(360deg); }
+    }
+    .price-card::after {
+      content: '';
+      position: absolute; inset: 2px;
+      border-radius: calc(var(--radius-xl) - 0px);
+      background: var(--bg-card);
+      z-index: -1;
+    }
+    .price-card-head {
+      background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(16,185,129,0.02));
+      padding: 32px 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .price-ribbon {
+      position: absolute; top: 16px; right: -34px;
+      background: var(--gold);
+      color: #000;
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 40px;
+      transform: rotate(45deg);
+    }
+    .price-card-head .pc-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--emerald);
+      margin-bottom: 10px;
+    }
+    .price-card-head .pc-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+    .price-card-head .pc-sub {
+      font-size: 14px; color: var(--text-muted);
+    }
+    .price-card-body { padding: 36px 40px; }
+    .price-main { text-align: center; margin-bottom: 32px; }
+    .price-main .p-was {
+      font-size: 15px; color: var(--text-dim);
+      text-decoration: line-through; margin-bottom: 6px;
+    }
+    .price-main .p-now {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(56px, 8vw, 86px);
+      font-weight: 900;
+      color: var(--emerald);
+      line-height: 1;
+      letter-spacing: -3px;
+    }
+    .price-main .p-cur {
+      font-size: 30px; vertical-align: top;
+      padding-top: 14px; display: inline-block;
+    }
+    .price-main .p-label {
+      font-size: 14px; color: var(--text-muted);
+      margin-top: 8px;
+    }
+    .price-includes {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 14px;
+      margin-bottom: 32px;
+    }
+    .price-includes li {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 15px; color: var(--text-soft);
+    }
+    .price-includes li .pi-check {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--emerald);
+      color: #000;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 900;
+      flex-shrink: 0;
+    }
+    .price-btn {
+      display: block;
+      width: 100%;
+      background: var(--emerald);
+      color: #000;
+      font-weight: 900;
+      font-size: 18px;
+      padding: 20px;
+      border-radius: 100px;
+      text-align: center;
+      border: none; cursor: pointer;
+      transition: all 0.3s var(--ease-out);
+      letter-spacing: 0.2px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(16,185,129,0.25);
+    }
+    .price-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      transform: translateX(-100%);
+    }
+    .price-btn:hover {
+      background: var(--emerald-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 40px rgba(16,185,129,0.4);
+    }
+    .price-btn:hover::before {
+      animation: btn-shimmer 0.6s ease-out;
+    }
+    .price-footnote {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 16px;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .price-footnote::before {
+      content: '🔒';
+      font-size: 13px;
+    }
+
+    /* ── Guarantee ── */
+    .guarantee-box {
+      max-width: 580px;
+      margin: 48px auto 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+    }
+    .guarantee-box .g-icon {
+      font-size: 44px; flex-shrink: 0;
+      filter: drop-shadow(0 0 12px rgba(16,185,129,0.3));
+    }
+    .guarantee-box h3 {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: 18px; font-weight: 800; margin-bottom: 8px;
+    }
+    .guarantee-box p {
+      font-size: 14px; color: var(--text-muted); line-height: 1.65;
+    }
+
+    /* ═══════════════════════════════════════════
+       FAQ
+    ═══════════════════════════════════════════ */
+    #faq {
+      background: var(--bg-base);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-list {
+      display: flex; flex-direction: column;
+      max-width: 700px; margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q {
+      width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 0;
+      font-size: clamp(14px, 1.4vw, 17px); font-weight: 700; color: var(--text);
+      font-family: 'Inter', sans-serif;
+      gap: 16px;
+      transition: color 0.2s;
+    }
+    .faq-q:hover { color: var(--emerald); }
+    .faq-icon-wrap {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--emerald-glow);
+      border: 1px solid rgba(16,185,129,0.2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.3s var(--ease-out);
+    }
+    .faq-q.open .faq-icon-wrap {
+      background: var(--emerald);
+      border-color: var(--emerald);
+    }
+    .faq-icon {
+      color: var(--emerald);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+      transition: transform 0.3s var(--ease-out), color 0.2s;
+    }
+    .faq-q.open .faq-icon {
+      transform: rotate(45deg);
+      color: #000;
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s var(--ease-out), padding 0.4s var(--ease-out);
+      font-size: clamp(13px, 1.2vw, 15px);
+      color: var(--text-muted);
+      line-height: 1.7;
+      padding-bottom: 0;
+    }
+    .faq-a.open {
+      max-height: 300px;
+      padding-bottom: 22px;
+    }
+
+    /* ═══════════════════════════════════════════
+       FINAL CTA
+    ═══════════════════════════════════════════ */
+    #final-cta {
+      background: var(--bg-deep);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #final-cta::before {
+      content: '';
+      position: absolute;
+      width: 100%; height: 100%;
+      bottom: 0; left: 0;
+      background: radial-gradient(ellipse 90% 60% at 50% 100%, rgba(16,185,129,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    #final-cta h2 {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: clamp(30px, 4.5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 18px;
+      position: relative;
+    }
+    #final-cta p {
+      font-size: clamp(15px, 1.6vw, 20px);
+      color: var(--text-soft);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.65;
+      position: relative;
+    }
+    .final-cta-btn {
+      position: relative;
+    }
+    .final-cta-btn .btn-primary {
+      font-size: 20px;
+      padding: 22px 60px;
+    }
+    .final-trust {
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--text-dim);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    footer {
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border);
+      padding: 36px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 2;
+    }
+    footer a { color: var(--text-muted); transition: color 0.2s; }
+    footer a:hover { color: var(--emerald); }
+
+    /* ═══════════════════════════════════════════
+       COUNTRY FLOAT
+    ═══════════════════════════════════════════ */
+    #country-float {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      z-index: 200;
+      background: rgba(10,14,26,0.92);
+      border: 1px solid var(--border2);
+      border-radius: 100px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      transition: all 0.3s;
+    }
+    #country-float:hover {
+      border-color: rgba(16,185,129,0.3);
+    }
+    #country-float label {
+      font-size: 12px; color: var(--text-muted);
+      font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+    #country-float select {
+      background: transparent; border: none;
+      color: var(--emerald);
+      font-size: 13px; font-weight: 700;
+      cursor: pointer;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+      -webkit-appearance: none;
+    }
+    #country-float select option {
+      background: var(--bg-card);
+      color: var(--text);
+    }
+
+    /* ═══════════════════════════════════════════
+       SOCIAL PROOF TOAST
+    ═══════════════════════════════════════════ */
+    #sp-toast {
+      position: fixed;
+      bottom: 80px;
+      left: 20px;
+      z-index: 300;
+      background: var(--bg-card);
+      border: 1px solid var(--border2);
+      border-left: 4px solid var(--emerald);
+      border-radius: var(--radius-md);
+      padding: 16px 18px 16px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      max-width: 320px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transform: translateX(-380px);
+      transition: transform 0.5s var(--ease-bounce);
+    }
+    #sp-toast.visible { transform: translateX(0); }
+    .sp-avatar {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(16,185,129,0.05));
+      border: 2px solid rgba(16,185,129,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800; color: var(--emerald);
+    }
+    .sp-text { flex: 1; }
+    .sp-name { font-size: 13px; font-weight: 800; color: var(--text); }
+    .sp-msg  { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .sp-time { font-size: 11px; color: var(--emerald); margin-top: 4px; font-weight: 600; }
+    .sp-close {
+      background: none; border: none; cursor: pointer;
+      color: var(--text-dim); font-size: 16px; line-height: 1;
+      padding: 4px 6px; flex-shrink: 0;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+    .sp-close:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════ */
+    @media (max-width: 880px) {
+      .pain-grid { grid-template-columns: 1fr; gap: 20px; }
+      .story-inner::before { display: none; }
+    }
+    @media (max-width: 720px) {
+      .testi-grid { grid-template-columns: 1fr; }
+      .forwho-grid { grid-template-columns: 1fr; }
+      .proof-numbers { flex-direction: column; }
+      .proof-item { min-width: auto; }
+      .price-card-body { padding: 28px 24px; }
+      .price-card-head { padding: 28px 24px; }
+      .guarantee-box { flex-direction: column; }
+      section { padding: 64px 0; }
+      .module-card { padding: 22px 20px; }
+      #sp-toast { max-width: calc(100vw - 40px); }
+    }
+    @media (max-width: 520px) {
+      #hero h1 { font-size: 32px; letter-spacing: -1px; }
+      .btn-primary { font-size: 16px; padding: 16px 36px; }
+      .hero-badges { gap: 8px; }
+      .hero-badge { font-size: 12px; padding: 6px 14px; }
+      .price-ribbon { display: none; }
+      .value-item { flex-direction: column; gap: 8px; }
+      .value-item-right { align-self: flex-start; padding-left: 38px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ ANNOUNCEMENT BAR ═══ -->
+<div class="ann-bar">
+  <span class="ann-bar-text">🔥 Limited Launch Price &nbsp;<span>|</span>&nbsp; <span class="cur-sym">₦</span><span class="cur-price">5,000</span> One-Time &nbsp;<span>|</span>&nbsp; Instant Access After Payment</span>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-logo">Digitstem</div>
+  <a href="#pricing" class="nav-cta">Get Instant Access →</a>
+</nav>
+
+<!-- ═══ SOCIAL PROOF TOAST ═══ -->
+<div id="sp-toast">
+  <div class="sp-avatar" id="sp-av">A</div>
+  <div class="sp-text">
+    <div class="sp-name" id="sp-name">Amaka from Lagos</div>
+    <div class="sp-msg">just purchased this course</div>
+    <div class="sp-time" id="sp-time">2 minutes ago</div>
+  </div>
+  <button class="sp-close" onclick="hideToast()">✕</button>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="container">
+    <div class="pre-head">The Fast Money Guide</div>
+    <h1>How Smart People Raise <em><span class="cur-sym">₦</span><span class="cur-goal">50,000</span></em><br>in Less Than <em>48 Hours</em><br>Using Only WhatsApp</h1>
+    <p class="hero-sub">A step-by-step course that shows you exactly how to raise money for any program, course, or investment from your existing contacts. No begging. No borrowing. No waiting.</p>
+    <div class="hero-cta-group">
+      <a href="#pricing" class="btn-primary">Yes, I Want to Raise Money Fast →</a>
+      <a href="#what-you-get" class="btn-ghost">See exactly what's inside ↓</a>
+    </div>
+    <div class="hero-badges">
+      <div class="hero-badge"><span class="badge-icon">🌍</span> Works in 14 countries</div>
+      <div class="hero-badge"><span class="badge-icon">📱</span> No ads. Just WhatsApp.</div>
+      <div class="hero-badge"><span class="badge-icon">⚡</span> Instant digital access</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PAIN SECTION ═══ -->
+<section id="pain">
+  <div class="container">
+    <div class="reveal">
+      <div class="tag">Does This Sound Familiar?</div>
+      <h2>You Want to Enroll in a Program<br>but the Money Isn't There Yet.</h2>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-col reveal-left">
+        <div class="pain-col-head problems">✗ The Problem</div>
+        <div class="pain-col-body problems-body">
+          <div class="pain-item"><div class="pain-icon bad">✗</div><span>You've been putting off that course or program because you can't raise the fee</span></div>
+          <div class="pain-item"><div class="pain-icon bad">✗</div><span>You've asked one or two people and felt embarrassed when they said no</span></div>
+          <div class="pain-item"><div class="pain-icon bad">✗</div><span>You've tried posting on social media and got sympathy but no money</span></div>
+          <div class="pain-item"><div class="pain-icon bad">✗</div><span>You keep saying "I'll sort it out next month" and next month never comes</span></div>
+          <div class="pain-item"><div class="pain-icon bad">✗</div><span>You feel like you don't have the right connections or a wealthy family</span></div>
+        </div>
+      </div>
+      <div class="pain-col reveal-right">
+        <div class="pain-col-head solutions">✓ The Truth</div>
+        <div class="pain-col-body solutions-body">
+          <div class="pain-item"><div class="pain-icon good">✓</div><span>You don't need rich relatives. You need the right message sent to the right people.</span></div>
+          <div class="pain-item"><div class="pain-icon good">✓</div><span>You don't need to post publicly. WhatsApp Broadcast is private and personal.</span></div>
+          <div class="pain-item"><div class="pain-icon good">✓</div><span>You don't need 100 people. Just 25 giving <span class="cur-sym">₦</span><span class="cur-ask">2,000</span> each is enough.</span></div>
+          <div class="pain-item"><div class="pain-icon good">✓</div><span>You don't need weeks. 48 hours is all it takes with the right sequence.</span></div>
+          <div class="pain-item" style="border-bottom:none;"><div class="pain-icon good">✓</div><span>The money is already around you. You just need the system.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STORY SECTION ═══ -->
+<section id="story">
+  <div class="container">
+    <div class="story-inner">
+      <div class="tag reveal">How This Was Born</div>
+      <div class="story-body">
+        <p class="reveal">
+          A few years ago, I found a program that I knew would change the direction of my career. The kind of opportunity you feel in your gut. I had done the research, spoken to people who had been through it, and I was certain this was it.
+        </p>
+        <p class="reveal">
+          There was just one problem. <strong>I didn't have the money.</strong>
+        </p>
+        <p class="reveal">
+          I had two weeks before enrollment closed. I tried the obvious things first. I checked my savings — not enough. I asked one family member — they said "maybe later." I posted something vague on Facebook about "needing support" — I got three prayer emojis and zero naira.
+        </p>
+
+        <div class="story-pull reveal">
+          <p>"I was watching the deadline get closer, feeling like the opportunity was slipping through my fingers — and there was nothing I could do about it."</p>
+        </div>
+
+        <p class="reveal">
+          Then one evening, completely frustrated, I sat down and did something I had never thought to do before. I scrolled through my phone contacts — all of them — and I started asking myself a simple question about each person: <em>"Would this person give me something small if I asked the right way?"</em>
+        </p>
+        <p class="reveal">
+          Not a loan. Not a gift. Just a contribution. A small, specific amount. With a clear reason and a clear deadline.
+        </p>
+        <p class="reveal">
+          I spent that night writing messages. Not begging. Not vague. <strong>Specific, warm, human messages</strong> — sent privately through WhatsApp. Not to a group. Not on a timeline. Person to person.
+        </p>
+        <p class="reveal">
+          By the next morning, money had started coming in.
+        </p>
+        <p class="reveal">
+          By the end of 48 hours, I had raised more than I needed.
+        </p>
+
+        <div class="story-divider"></div>
+
+        <p class="reveal">
+          I was stunned. Not because people gave — but because of <em>how many</em> people gave. People I hadn't spoken to in over a year. A former classmate. Someone from my old church. A colleague I helped with something small two years before. They all showed up.
+        </p>
+        <p class="reveal">
+          The money was never the problem. <strong>The approach was the problem.</strong>
+        </p>
+        <p class="reveal">
+          I had been asking the wrong way, on the wrong platforms, with the wrong framing. The moment I changed the method, everything changed.
+        </p>
+        <p class="reveal">
+          I enrolled in that program. And afterwards, I spent months documenting exactly what I had done — every message, every timing decision, every word choice — into a repeatable system that anyone could follow.
+        </p>
+
+        <div class="story-pull reveal">
+          <p>"That system is this course. And the only difference between where you are right now and where I was at the end of those 48 hours — is that you haven't started yet."</p>
+        </div>
+
+        <p class="reveal" style="color: var(--emerald-bright); font-weight: 700; font-size: clamp(15px,1.6vw,18px);">
+          The money is already around you. Let me show you exactly how to reach it.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROOF BAR ═══ -->
+<div id="proof-bar">
+  <div class="container-wide">
+    <div class="proof-numbers">
+      <div class="proof-item reveal">
+        <div class="pn" data-count="48">0</div>
+        <div class="pl">hours to raise your goal</div>
+      </div>
+      <div class="proof-item reveal" style="transition-delay: 0.1s;">
+        <div class="pn" data-count="1">0</div>
+        <div class="pl">proven system to follow</div>
+      </div>
+      <div class="proof-item reveal" style="transition-delay: 0.2s;">
+        <div class="pn" data-count="100" data-suffix="%">0%</div>
+        <div class="pl">done with your phone</div>
+      </div>
+      <div class="proof-item reveal" style="transition-delay: 0.3s;">
+        <div class="pn"><span class="cur-sym">₦</span>0</div>
+        <div class="pl">ad spend required</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ WHAT'S INSIDE ═══ -->
+<section id="what-you-get">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="tag">What's Inside the Course</div>
+      <h2>4 Modules. 13 Lessons.<br>One System That Actually Works.</h2>
+      <div class="divider"></div>
+      <p>Every module builds on the last. By the time you reach Module 4, you have everything you need to go live with your campaign today.</p>
+    </div>
+    <div class="module-list">
+      <div class="module-card reveal">
+        <div class="module-num">1</div>
+        <div class="module-content">
+          <h3>The Money Mindset Shift</h3>
+          <p>Before you send anything, you need to understand something most people get completely wrong about asking for money. This module rewires how you think — and why that alone changes everything about your results.</p>
+          <div class="lessons">
+            <div class="lesson-pill">3 Lessons</div>
+            <div class="lesson-pill">Mindset + Strategy</div>
+          </div>
+        </div>
+      </div>
+      <div class="module-card reveal">
+        <div class="module-num">2</div>
+        <div class="module-content">
+          <h3>The Crowdfunding Principle</h3>
+          <p>This module shows you the exact same principle that funded some of the world's biggest companies — and how ordinary people have been quietly using it for decades. Once you see it, you'll never feel awkward asking again.</p>
+          <div class="lessons">
+            <div class="lesson-pill">2 Lessons</div>
+            <div class="lesson-pill">Psychology + Proof</div>
+          </div>
+        </div>
+      </div>
+      <div class="module-card reveal">
+        <div class="module-num">3</div>
+        <div class="module-content">
+          <h3>What You Need to Get Started</h3>
+          <p>You don't need a website, paid ads, or any special tools. This module shows you the exact setup that makes the entire system work — and why most people overlook the one channel that outperforms everything else.</p>
+          <div class="lessons">
+            <div class="lesson-pill">3 Lessons</div>
+            <div class="lesson-pill">Setup + Tools</div>
+          </div>
+        </div>
+      </div>
+      <div class="module-card core-module reveal">
+        <div class="module-num">4</div>
+        <div class="module-content">
+          <h3>The Fast Money System <span class="core-badge">CORE</span></h3>
+          <p>This is where you execute. A specific sequence of messages sent in a specific order over 48 hours — each one building on the last. You get every word written out for you, a voice note script, a step-by-step timeline, and a tracker. Follow it exactly and the results follow.</p>
+          <div class="lessons">
+            <div class="lesson-pill">5 Lessons</div>
+            <div class="lesson-pill">Full Execution Playbook</div>
+            <div class="lesson-pill">Word-for-Word Templates</div>
+            <div class="lesson-pill">48-Hour Timeline</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BONUS -->
+    <div class="bonus-card reveal">
+      <div class="tag gold-tag">Bonus Included</div>
+      <h3>📋 The Fast Money Execution Checklist</h3>
+      <p>A downloadable, printable workbook that keeps you on track from the moment you start your campaign to the moment you hit your goal. Every step laid out, every box to tick, every number to log. Works in all 14 supported countries with automatic currency adjustment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHO IT'S FOR ═══ -->
+<section id="for-who">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="tag">Who This Is For</div>
+      <h2>This Course Was Built for You If…</h2>
+    </div>
+    <div class="forwho-grid">
+      <div class="forwho-card reveal"><div class="fw-icon">🎓</div><p>You want to enroll in a course, training, or certification but need to raise the fee first</p></div>
+      <div class="forwho-card reveal"><div class="fw-icon">📱</div><p>You have WhatsApp and a phone. That is genuinely all you need to start.</p></div>
+      <div class="forwho-card reveal"><div class="fw-icon">🌍</div><p>You're based anywhere Flutterwave or Paystack operates: Nigeria, Ghana, Kenya, Tanzania, Uganda, Rwanda, South Africa, Zambia, Cameroon, Ivory Coast, Egypt, UK, USA, or Europe</p></div>
+      <div class="forwho-card reveal"><div class="fw-icon">⏰</div><p>You need the money within 48 hours, not in "a few weeks when things improve"</p></div>
+      <div class="forwho-card reveal"><div class="fw-icon">😬</div><p>You've tried asking people before but had no strategy and felt embarrassed</p></div>
+      <div class="forwho-card reveal"><div class="fw-icon">🔄</div><p>You want a repeatable system you can use every time you need to raise money fast</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="testimonials">
+  <div class="container-wide">
+    <div class="section-head reveal">
+      <div class="tag">Real Results</div>
+      <h2>Students Who Used This System</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-body">"I was skeptical because I'd tried asking people before and it was so awkward. But the sequence in this course is different. By the time I sent Message 4, three people had already asked ME how to send the money. I raised my goal in 31 hours."</div>
+        <div class="testi-result">Raised <span class="cur-sym">₦</span><span class="cur-r1">50,000</span> in 31 hours</div>
+        <div class="testi-author">
+          <div class="testi-avatar">A</div>
+          <div><div class="testi-name">Adaeze O.</div><div class="testi-loc">Lagos, Nigeria</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay: 0.1s;">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-body">"The voice note was the game changer for me. I sent the text messages before and got low response. The moment I recorded my voice, people started responding within minutes. Something about hearing your voice makes it real."</div>
+        <div class="testi-result">Raised GH₵480 in 40 hours</div>
+        <div class="testi-author">
+          <div class="testi-avatar">K</div>
+          <div><div class="testi-name">Kwame A.</div><div class="testi-loc">Accra, Ghana</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay: 0.2s;">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-body">"I thought I needed rich connections. Turns out I just needed a strategy. I messaged 48 people. 27 of them contributed. People I hadn't spoken to in two years! This system actually works. Buy this course."</div>
+        <div class="testi-result">Raised KSh 14,500 in 48 hours</div>
+        <div class="testi-author">
+          <div class="testi-avatar">F</div>
+          <div><div class="testi-name">Fatuma M.</div><div class="testi-loc">Nairobi, Kenya</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VALUE STACK ═══ -->
+<section id="value">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="tag">The Value Breakdown</div>
+      <h2>Everything You're Getting Today</h2>
+    </div>
+    <div class="value-list">
+      <div class="value-item reveal">
+        <div class="value-item-left">
+          <div class="value-check">✓</div>
+          <div class="value-item-name">The Fast Money Guide: Full Course (4 Modules, 13 Lessons)</div>
+        </div>
+        <div class="value-item-right">
+          <div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-reg">15,000</span></div>
+          <div class="value-item-inc">✓ Included</div>
+        </div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-item-left">
+          <div class="value-check">✓</div>
+          <div class="value-item-name">5 WhatsApp Message Templates (word-for-word, ready to send)</div>
+        </div>
+        <div class="value-item-right">
+          <div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-5k">5,000</span></div>
+          <div class="value-item-inc">✓ Included</div>
+        </div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-item-left">
+          <div class="value-check">✓</div>
+          <div class="value-item-name">Voice Note Script (exactly what to say in 60–90 seconds)</div>
+        </div>
+        <div class="value-item-right">
+          <div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-3k">3,000</span></div>
+          <div class="value-item-inc">✓ Included</div>
+        </div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-item-left">
+          <div class="value-check">✓</div>
+          <div class="value-item-name">The Execution Checklist (downloadable, printable workbook)</div>
+        </div>
+        <div class="value-item-right">
+          <div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-3k2">3,000</span></div>
+          <div class="value-item-inc">✓ Included</div>
+        </div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-item-left">
+          <div class="value-check">✓</div>
+          <div class="value-item-name">48-Hour Campaign Timeline &amp; Results Tracker</div>
+        </div>
+        <div class="value-item-right">
+          <div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-2k">2,000</span></div>
+          <div class="value-item-inc">✓ Included</div>
+        </div>
+      </div>
+      <div class="value-item reveal">
+        <div class="value-item-left">
+          <div class="value-check">✓</div>
+          <div class="value-item-name">Multi-country currency guide (14 countries via Flutterwave &amp; Paystack)</div>
+        </div>
+        <div class="value-item-right">
+          <div class="value-item-strike"><span class="cur-sym">₦</span><span class="cur-val-2k2">2,000</span></div>
+          <div class="value-item-inc">✓ Included</div>
+        </div>
+      </div>
+    </div>
+    <div class="value-total reveal">
+      <div class="vt-label">Total value</div>
+      <div class="vt-right">
+        <span class="vt-cross"><span class="cur-sym">₦</span><span class="cur-val-total">30,000</span></span>
+        <span class="vt-num">You pay: <span class="cur-sym">₦</span><span class="cur-price">5,000</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="tag">Get Instant Access</div>
+      <h2>One Payment. Lifetime Access.<br>Start Today.</h2>
+    </div>
+    <div class="price-card reveal">
+      <div class="price-card-head">
+        <div class="price-ribbon">BEST VALUE</div>
+        <div class="pc-tag">The Fast Money Guide</div>
+        <div class="pc-name">Complete Course + Checklist</div>
+        <div class="pc-sub">Instant digital access · 14 countries supported</div>
+      </div>
+      <div class="price-card-body">
+        <div class="price-main">
+          <div class="p-was">Regular price: <span class="cur-sym">₦</span><span class="cur-reg-price">15,000</span></div>
+          <div class="p-now"><span class="p-cur cur-sym">₦</span><span class="cur-price">5,000</span></div>
+          <div class="p-label">One-time payment · No subscription</div>
+        </div>
+        <ul class="price-includes">
+          <li><div class="pi-check">✓</div> Full course: 4 modules, 13 lessons</li>
+          <li><div class="pi-check">✓</div> 5 ready-to-send WhatsApp message templates</li>
+          <li><div class="pi-check">✓</div> Voice note script (60–90 seconds)</li>
+          <li><div class="pi-check">✓</div> Printable execution checklist &amp; workbook</li>
+          <li><div class="pi-check">✓</div> 48-hour timeline &amp; results tracker</li>
+          <li><div class="pi-check">✓</div> Works in 14 countries via Flutterwave &amp; Paystack</li>
+        </ul>
+        <a href="https://digitstem.com/marketplace/fast-money-guide" class="price-btn" id="buy-btn">
+          Get Instant Access for <span class="cur-sym">₦</span><span class="cur-price">5,000</span> →
+        </a>
+        <div class="price-footnote">Secure payment · Instant access after purchase · Available in your local currency</div>
+      </div>
+    </div>
+
+    <!-- Guarantee -->
+    <div class="guarantee-box reveal">
+      <div class="g-icon">🛡️</div>
+      <div>
+        <h3>Risk-Free Guarantee</h3>
+        <p>If you go through the course, follow the system step by step, and don't raise at least a portion of your goal within 48 hours — reach out to our support team. We'll work with you to troubleshoot your campaign at no extra cost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="tag">FAQ</div>
+      <h2>Questions? We Have Answers.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do I need any special app or tool to do this?
+          <div class="faq-icon-wrap"><span class="faq-icon">+</span></div>
+        </button>
+        <div class="faq-a">No. You only need WhatsApp, which you already have, and your phone. No paid tools, no website, no ads. That's the entire toolkit.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What if I don't have many contacts on WhatsApp?
+          <div class="faq-icon-wrap"><span class="faq-icon">+</span></div>
+        </button>
+        <div class="faq-a">You need 50 warm contacts, not 500. Most people underestimate how many warm contacts they have. The course includes a framework to identify them. If you've lived, gone to school, worked, or attended church or a mosque, you have enough contacts.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is this suitable for my country?
+          <div class="faq-icon-wrap"><span class="faq-icon">+</span></div>
+        </button>
+        <div class="faq-a">Yes. The Fast Money Guide works in every country where Flutterwave or Paystack operates: Nigeria, Ghana, Kenya, Tanzania, Uganda, Rwanda, South Africa, Zambia, Cameroon, Ivory Coast, Egypt, the UK, the USA, and Europe. All currency amounts and payment platform examples adapt automatically when you select your country.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What if people say no or don't respond?
+          <div class="faq-icon-wrap"><span class="faq-icon">+</span></div>
+        </button>
+        <div class="faq-a">Some people will. That's normal. The system is designed around this, which is why you contact 50 people instead of 5. Even if 50% say no, you still hit your goal. The sequence is built to maximize the number of yeses from your actual warm contacts.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can I use this more than once?
+          <div class="faq-icon-wrap"><span class="faq-icon">+</span></div>
+        </button>
+        <div class="faq-a">Yes, and that's one of the most valuable things about the system. Once you understand the principles and have the templates, you can run this campaign every time you need to raise money. Many students run it quarterly.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How do I access the course after purchase?
+          <div class="faq-icon-wrap"><span class="faq-icon">+</span></div>
+        </button>
+        <div class="faq-a">You get instant digital access immediately after payment through Digitstem's marketplace. No waiting. No shipping. Log in and start within minutes of completing your purchase.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section id="final-cta">
+  <div class="container">
+    <h2 class="reveal">The Money Is Already<br>Around You. <em>Start Tonight.</em></h2>
+    <p class="reveal">48 hours from now, you could have <span class="cur-sym">₦</span><span class="cur-r1">50,000</span> or more sitting in your account — raised from people who already know and trust you. All you need is the system.</p>
+    <div class="final-cta-btn reveal">
+      <a href="#pricing" class="btn-primary" style="font-size:20px;padding:22px 60px;">
+        Get the Fast Money Guide for <span class="cur-sym">₦</span><span class="cur-price">5,000</span> →
+      </a>
+    </div>
+    <div class="final-trust reveal">
+      <span>Instant access after payment</span>
+      <span>·</span>
+      <span>One-time payment</span>
+      <span>·</span>
+      <span>No subscription</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div>© 2026 Digitstem · All Rights Reserved</div>
+  <div style="margin-top:6px;">
+    <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
+    <a href="#">Terms</a> &nbsp;·&nbsp;
+    <a href="mailto:support@digitstem.com">Contact Support</a>
+  </div>
+  <div style="margin-top:10px; font-size:11px; color:var(--text-dim);">
+    Results may vary. Earnings depend on individual effort, contacts, and execution of the system.
+  </div>
+</footer>
+
+<!-- ═══ COUNTRY FLOAT ═══ -->
+<div id="country-float">
+  <label>🌍</label>
+  <select id="country-sel" onchange="setCountry(this.value)">
+    <optgroup label="Africa">
+      <option value="ng">Nigeria (₦)</option>
+      <option value="gh">Ghana (GH₵)</option>
+      <option value="ke">Kenya (KSh)</option>
+      <option value="tz">Tanzania (TZS)</option>
+      <option value="ug">Uganda (UGX)</option>
+      <option value="rw">Rwanda (RWF)</option>
+      <option value="za">S. Africa (R)</option>
+      <option value="zm">Zambia (ZMW)</option>
+      <option value="cm">Cameroon (FCFA)</option>
+      <option value="ci">Ivory Coast (XOF)</option>
+      <option value="eg">Egypt (EGP)</option>
+    </optgroup>
+    <optgroup label="International">
+      <option value="gb">United Kingdom (£)</option>
+      <option value="us">United States ($)</option>
+      <option value="eu">Europe (€)</option>
+    </optgroup>
+  </select>
+</div>
+
+<script>
+  /* ═══════════════════════════════════════════
+     CURRENCY SYSTEM (bug fixed — all prices now update)
+  ═══════════════════════════════════════════ */
+  const currencies = {
+    ng: { sym:'₦',    price:'5,000',   regPrice:'15,000',  goal:'50,000',  ask:'2,000',  r1:'50,000',  r2:'100,000',  v1:'15,000', v2:'5,000', v3:'3,000', v4:'3,000', v5:'2,000', v6:'2,000', vt:'30,000' },
+    gh: { sym:'GH₵',  price:'50',      regPrice:'150',     goal:'500',     ask:'20',     r1:'500',     r2:'1,000',    v1:'150',    v2:'50',    v3:'30',    v4:'30',    v5:'20',    v6:'20',    vt:'300' },
+    ke: { sym:'KSh',  price:'650',     regPrice:'1,950',   goal:'6,500',   ask:'250',    r1:'6,500',   r2:'13,000',   v1:'1,950',  v2:'650',   v3:'390',   v4:'390',   v5:'260',   v6:'260',   vt:'3,900' },
+    tz: { sym:'TZS',  price:'13,000',  regPrice:'39,000',  goal:'130,000', ask:'5,000',  r1:'130,000', r2:'260,000',  v1:'39,000', v2:'13,000',v3:'7,800', v4:'7,800', v5:'5,200', v6:'5,200', vt:'78,000' },
+    ug: { sym:'UGX',  price:'18,000',  regPrice:'54,000',  goal:'180,000', ask:'7,000',  r1:'180,000', r2:'360,000',  v1:'54,000', v2:'18,000',v3:'10,800',v4:'10,800',v5:'7,200', v6:'7,200', vt:'108,000' },
+    rw: { sym:'RWF',  price:'7,000',   regPrice:'21,000',  goal:'70,000',  ask:'3,000',  r1:'70,000',  r2:'140,000',  v1:'21,000', v2:'7,000', v3:'4,200', v4:'4,200', v5:'2,800', v6:'2,800', vt:'42,000' },
+    za: { sym:'R',    price:'90',      regPrice:'270',     goal:'900',     ask:'35',     r1:'900',     r2:'1,800',    v1:'270',    v2:'90',    v3:'54',    v4:'54',    v5:'36',    v6:'36',    vt:'540' },
+    zm: { sym:'ZMW',  price:'130',     regPrice:'390',     goal:'1,300',   ask:'50',     r1:'1,300',   r2:'2,600',    v1:'390',    v2:'130',   v3:'78',    v4:'78',    v5:'52',    v6:'52',    vt:'780' },
+    cm: { sym:'FCFA', price:'3,000',   regPrice:'9,000',   goal:'30,000',  ask:'1,200',  r1:'30,000',  r2:'60,000',   v1:'9,000',  v2:'3,000', v3:'1,800', v4:'1,800', v5:'1,200', v6:'1,200', vt:'18,000' },
+    ci: { sym:'XOF',  price:'3,000',   regPrice:'9,000',   goal:'30,000',  ask:'1,200',  r1:'30,000',  r2:'60,000',   v1:'9,000',  v2:'3,000', v3:'1,800', v4:'1,800', v5:'1,200', v6:'1,200', vt:'18,000' },
+    eg: { sym:'EGP',  price:'250',     regPrice:'750',     goal:'2,500',   ask:'100',    r1:'2,500',   r2:'5,000',    v1:'750',    v2:'250',   v3:'150',   v4:'150',   v5:'100',   v6:'100',   vt:'1,500' },
+    gb: { sym:'£',    price:'4',       regPrice:'12',      goal:'40',      ask:'2',      r1:'40',      r2:'80',       v1:'12',     v2:'4',     v3:'2.40',  v4:'2.40',  v5:'1.60',  v6:'1.60',  vt:'24' },
+    us: { sym:'$',    price:'5',       regPrice:'15',      goal:'50',      ask:'2',      r1:'50',      r2:'100',      v1:'15',     v2:'5',     v3:'3',     v4:'3',     v5:'2',     v6:'2',     vt:'30' },
+    eu: { sym:'€',    price:'5',       regPrice:'15',      goal:'50',      ask:'2',      r1:'50',      r2:'100',      v1:'15',     v2:'5',     v3:'3',     v4:'3',     v5:'2',     v6:'2',     vt:'30' },
+  };
+
+  function setCountry(code) {
+    const c = currencies[code];
+    if (!c) return;
+    document.querySelectorAll('.cur-sym').forEach(el => el.textContent = c.sym);
+    document.querySelectorAll('.cur-price').forEach(el => el.textContent = c.price);
+    document.querySelectorAll('.cur-reg-price').forEach(el => el.textContent = c.regPrice);
+    document.querySelectorAll('.cur-goal').forEach(el => el.textContent = c.goal);
+    document.querySelectorAll('.cur-ask').forEach(el => el.textContent = c.ask);
+    document.querySelectorAll('.cur-r1').forEach(el => el.textContent = c.r1);
+    document.querySelectorAll('.cur-r2').forEach(el => el.textContent = c.r2);
+    // Value stack
+    document.querySelectorAll('.cur-val-reg').forEach(el => el.textContent = c.v1);
+    document.querySelectorAll('.cur-val-5k').forEach(el => el.textContent = c.v2);
+    document.querySelectorAll('.cur-val-3k').forEach(el => el.textContent = c.v3);
+    document.querySelectorAll('.cur-val-3k2').forEach(el => el.textContent = c.v4);
+    document.querySelectorAll('.cur-val-2k').forEach(el => el.textContent = c.v5);
+    document.querySelectorAll('.cur-val-2k2').forEach(el => el.textContent = c.v6);
+    document.querySelectorAll('.cur-val-total').forEach(el => el.textContent = c.vt);
+    document.title = `The Fast Money Guide: Raise ${c.sym}${c.goal} in 48 Hours Using WhatsApp`;
+    localStorage.setItem('fmg_country', code);
+  }
+
+  /* ═══════════════════════════════════════════
+     FAQ ACCORDION (smooth height animation)
+  ═══════════════════════════════════════════ */
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-a.open').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q.open').forEach(b => b.classList.remove('open'));
+    // Open clicked if it was closed
+    if (!isOpen) {
+      answer.classList.add('open');
+      btn.classList.add('open');
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     SCROLL REVEAL (IntersectionObserver)
+  ═══════════════════════════════════════════ */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  /* ═══════════════════════════════════════════
+     ANIMATED COUNTERS
+  ═══════════════════════════════════════════ */
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-count'));
+        const suffix = el.getAttribute('data-suffix') || '';
+        if (isNaN(target)) return;
+        let current = 0;
+        const duration = 1200;
+        const increment = target / (duration / 16);
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          el.textContent = Math.floor(current) + suffix;
+        }, 16);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-count]').forEach(el => {
+    counterObserver.observe(el);
+  });
+
+  /* ═══════════════════════════════════════════
+     SOCIAL PROOF NOTIFICATIONS
+  ═══════════════════════════════════════════ */
+  const buyers = [
+    { name:'Amaka',      country:'Lagos, Nigeria',         initial:'A', ago:'just now' },
+    { name:'Chidi',      country:'Enugu, Nigeria',         initial:'C', ago:'1 minute ago' },
+    { name:'Sade',       country:'Abuja, Nigeria',         initial:'S', ago:'2 minutes ago' },
+    { name:'Emeka',      country:'Port Harcourt, Nigeria', initial:'E', ago:'just now' },
+    { name:'Ngozi',      country:'Onitsha, Nigeria',       initial:'N', ago:'3 minutes ago' },
+    { name:'Kwame',      country:'Accra, Ghana',           initial:'K', ago:'1 minute ago' },
+    { name:'Abena',      country:'Kumasi, Ghana',          initial:'A', ago:'2 minutes ago' },
+    { name:'Fatuma',     country:'Nairobi, Kenya',         initial:'F', ago:'just now' },
+    { name:'Brian',      country:'Mombasa, Kenya',         initial:'B', ago:'4 minutes ago' },
+    { name:'Amina',      country:'Dar es Salaam, Tanzania',initial:'A', ago:'just now' },
+    { name:'Joseph',     country:'Arusha, Tanzania',       initial:'J', ago:'2 minutes ago' },
+    { name:'Stella',     country:'Kampala, Uganda',        initial:'S', ago:'1 minute ago' },
+    { name:'Ronald',     country:'Entebbe, Uganda',        initial:'R', ago:'3 minutes ago' },
+    { name:'Jean-Claude',country:'Kigali, Rwanda',         initial:'J', ago:'just now' },
+    { name:'Claudine',   country:'Kigali, Rwanda',         initial:'C', ago:'2 minutes ago' },
+    { name:'Thandiwe',   country:'Johannesburg, S. Africa',initial:'T', ago:'1 minute ago' },
+    { name:'Lerato',     country:'Cape Town, S. Africa',   initial:'L', ago:'2 minutes ago' },
+    { name:'Sipho',      country:'Durban, S. Africa',      initial:'S', ago:'just now' },
+    { name:'Mwamba',     country:'Lusaka, Zambia',         initial:'M', ago:'just now' },
+    { name:'Chanceline', country:'Douala, Cameroon',       initial:'C', ago:'3 minutes ago' },
+    { name:'Aya',        country:'Abidjan, Ivory Coast',   initial:'A', ago:'1 minute ago' },
+    { name:'Koffi',      country:'Abidjan, Ivory Coast',   initial:'K', ago:'just now' },
+    { name:'Mohamed',    country:'Cairo, Egypt',           initial:'M', ago:'2 minutes ago' },
+    { name:'Nour',       country:'Alexandria, Egypt',      initial:'N', ago:'4 minutes ago' },
+    { name:'David',      country:'London, UK',             initial:'D', ago:'just now' },
+    { name:'Chisom',     country:'Manchester, UK',         initial:'C', ago:'1 minute ago' },
+    { name:'Marcus',     country:'Atlanta, USA',           initial:'M', ago:'2 minutes ago' },
+    { name:'Tolu',       country:'Houston, USA',           initial:'T', ago:'just now' },
+    { name:'Sophie',     country:'Paris, France',          initial:'S', ago:'3 minutes ago' },
+    { name:'Precious',   country:'Warri, Nigeria',         initial:'P', ago:'1 minute ago' },
+    { name:'Adaeze',     country:'Owerri, Nigeria',        initial:'A', ago:'just now' },
+    { name:'Kofi',       country:'Takoradi, Ghana',        initial:'K', ago:'5 minutes ago' },
+    { name:'Ifeoma',     country:'Ibadan, Nigeria',        initial:'I', ago:'2 minutes ago' },
+    { name:'Tunde',      country:'Lagos, Nigeria',         initial:'T', ago:'just now' },
+    { name:'Wanjiru',    country:'Nairobi, Kenya',         initial:'W', ago:'3 minutes ago' },
+  ];
+
+  let toastIdx = Math.floor(Math.random() * buyers.length);
+  let toastTimer = null;
+
+  function showToast() {
+    const b = buyers[toastIdx % buyers.length];
+    toastIdx++;
+    document.getElementById('sp-av').textContent   = b.initial;
+    document.getElementById('sp-name').textContent = b.name + ' from ' + b.country;
+    document.getElementById('sp-time').textContent = b.ago;
+    const toast = document.getElementById('sp-toast');
+    toast.classList.add('visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(hideToast, 6000);
+  }
+
+  function hideToast() {
+    document.getElementById('sp-toast').classList.remove('visible');
+  }
+
+  // First notification after 8 seconds, then every 60 seconds
+  setTimeout(() => {
+    showToast();
+    setInterval(showToast, 60000);
+  }, 8000);
+
+  /* ═══════════════════════════════════════════
+     INIT
+  ═══════════════════════════════════════════ */
+  const saved = localStorage.getItem('fmg_country') || 'ng';
+  document.getElementById('country-sel').value = saved;
+  setCountry(saved);
+</script>
+</body>
+</html>
