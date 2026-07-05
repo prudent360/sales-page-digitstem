@@ -1715,7 +1715,7 @@
           <li><div class="pi-check">✓</div> 48-hour timeline &amp; results tracker</li>
           <li><div class="pi-check">✓</div> Works in 14 countries via Flutterwave &amp; Paystack</li>
         </ul>
-        <a href="https://digitstem.com/marketplace/fast-money-guide" class="price-btn" id="buy-btn">
+        <a href="https://pay.digitstem.com/JZKAGWTROUYM" class="price-btn" id="buy-btn">
           Get Instant Access for <span class="cur-sym">₦</span><span class="cur-price">5,000</span> →
         </a>
         <div class="price-footnote">Secure payment · Instant access after purchase · Available in your local currency</div>
@@ -2022,6 +2022,267 @@
   const saved = localStorage.getItem('fmg_country') || 'ng';
   document.getElementById('country-sel').value = saved;
   setCountry(saved);
+
+  /* ═══ DIGITSTEM AFFILIATE TRACKING MODULE ═══ */
+  (function() {
+    const basePaymentUrl = 'https://pay.digitstem.com/JZKAGWTROUYM';
+    
+    // Parse af_id from URL query or load from localStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    let afId = urlParams.get('af_id');
+    if (afId) {
+      localStorage.setItem('digitstem_af_id', afId);
+    } else {
+      afId = localStorage.getItem('digitstem_af_id');
+    }
+
+    // Update all checkout links to point to the pay.digitstem.com destination with af_id if present
+    const ctaLinks = document.querySelectorAll('a[href*="digitstem.com/marketplace/fast-money-guide"], a[href*="pay.digitstem.com"]');
+    ctaLinks.forEach(link => {
+      let targetUrl = basePaymentUrl;
+      if (afId) {
+        targetUrl = targetUrl.replace(/\/$/, '') + '/' + afId;
+      }
+      link.href = targetUrl;
+    });
+
+    // Inject Tracking Status Widget (HTML & CSS)
+    const isTracked = !!afId;
+    const statusClass = isTracked ? 'tracked' : 'untracked';
+    const badgeText = isTracked ? 'ORDER IS TRACKED BY DIGITSTEM' : 'ORDER IS NOT TRACKED';
+    const popupTitle = isTracked ? 'Order is Tracked!' : 'Order is Not Tracked';
+    const popupDesc = isTracked 
+      ? 'You can proceed to purchase the product as your order is being tracked.' 
+      : 'Please do not proceed to purchase this product as your order is not being tracked. Kindly go back and recopy the product link from the marketplace.';
+
+    const widgetHtml = `
+      <div id="digitstem-tracker-widget" class="${statusClass}">
+        <button class="tracker-badge" onclick="toggleTrackerPopup(true)">
+          <span class="indicator-dot"></span>
+          <span class="badge-label">${badgeText}</span>
+        </button>
+        <div id="tracker-overlay" onclick="toggleTrackerPopup(false)"></div>
+        <div id="tracker-popup">
+          <button class="close-btn" onclick="toggleTrackerPopup(false)">&times;</button>
+          <div class="popup-icon">${isTracked ? '✅' : '⚠️'}</div>
+          <h3>${popupTitle}</h3>
+          <p>${popupDesc}</p>
+          ${isTracked ? `<div class="af-id-display">Affiliate ID: <code>${afId}</code></div>` : ''}
+          <button class="btn-ack" onclick="toggleTrackerPopup(false)">Got it</button>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', widgetHtml);
+
+    // Global toggle function
+    window.toggleTrackerPopup = function(show) {
+      const overlay = document.getElementById('tracker-overlay');
+      const popup = document.getElementById('tracker-popup');
+      if (show) {
+        overlay.style.display = 'block';
+        popup.style.display = 'block';
+        setTimeout(() => {
+          overlay.style.opacity = '1';
+          popup.classList.add('visible');
+        }, 10);
+      } else {
+        overlay.style.opacity = '0';
+        popup.classList.remove('visible');
+        setTimeout(() => {
+          overlay.style.display = 'none';
+          popup.style.display = 'none';
+        }, 300);
+      }
+    };
+  })();
 </script>
+
+<style>
+  /* ═══ DIGITSTEM TRACKING WIDGET ═══ */
+  #digitstem-tracker-widget {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 9999;
+    font-family: 'Inter', sans-serif;
+  }
+  @media (max-width: 768px) {
+    #digitstem-tracker-widget {
+      bottom: 130px;
+    }
+  }
+  .tracker-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: rgba(15, 20, 36, 0.85);
+    border: 1px solid var(--border2);
+    border-radius: 100px;
+    color: var(--text);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s var(--ease-out);
+    animation: tracker-bounce 3s infinite ease-in-out;
+  }
+  .tracker-badge:hover {
+    border-color: var(--emerald);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(16, 185, 129, 0.25);
+  }
+  #digitstem-tracker-widget.untracked .tracker-badge:hover {
+    border-color: var(--red);
+    box-shadow: 0 12px 40px rgba(248, 113, 113, 0.25);
+  }
+  .indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+  }
+  #digitstem-tracker-widget.tracked .indicator-dot {
+    background: var(--emerald);
+    box-shadow: 0 0 10px var(--emerald);
+  }
+  #digitstem-tracker-widget.untracked .indicator-dot {
+    background: var(--red);
+    box-shadow: 0 0 10px var(--red);
+  }
+  #digitstem-tracker-widget.tracked .indicator-dot::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--emerald);
+    animation: pulse-ring 1.5s infinite ease-out;
+    opacity: 0;
+  }
+  #digitstem-tracker-widget.untracked .indicator-dot::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--red);
+    animation: pulse-ring 1.5s infinite ease-out;
+    opacity: 0;
+  }
+
+  /* ── Popups & Overlay ── */
+  #tracker-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 7, 16, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s var(--ease-out);
+  }
+  #tracker-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -45%) scale(0.95);
+    width: 90%;
+    max-width: 400px;
+    background: var(--bg-card);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    z-index: 10001;
+    opacity: 0;
+    transition: all 0.3s var(--ease-out);
+  }
+  #tracker-popup.visible {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  #tracker-popup h3 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  #tracker-popup p {
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  #tracker-popup .popup-icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+  }
+  #tracker-popup .close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  #tracker-popup .close-btn:hover {
+    color: var(--text);
+  }
+  .af-id-display {
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    margin-bottom: 24px;
+    font-size: 13px;
+  }
+  .af-id-display code {
+    color: var(--emerald-bright);
+    font-weight: 700;
+  }
+  .btn-ack {
+    display: inline-block;
+    width: 100%;
+    padding: 12px 24px;
+    background: var(--grad-emerald);
+    border: none;
+    border-radius: var(--radius-md);
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    transition: all 0.2s;
+  }
+  .btn-ack:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+  }
+  #digitstem-tracker-widget.untracked .btn-ack {
+    background: linear-gradient(135deg, var(--red) 0%, #dc2626 100%);
+    box-shadow: 0 4px 12px rgba(248, 113, 113, 0.2);
+  }
+  #digitstem-tracker-widget.untracked .btn-ack:hover {
+    box-shadow: 0 6px 16px rgba(248, 113, 113, 0.3);
+  }
+
+  @keyframes tracker-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+</style>
 </body>
 </html>
