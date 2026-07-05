@@ -51,7 +51,7 @@
       --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     html { scroll-behavior: smooth; }
-    body {
+        body {
       background: var(--bg-deep);
       color: var(--text);
       font-family: 'Inter', -apple-system, sans-serif;
@@ -59,6 +59,7 @@
       line-height: 1.65;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      padding-top: 41px;
     }
     body::before {
       content: '';
@@ -74,7 +75,7 @@
 
     /* ═══ PROGRESS BAR ═══ */
     #progress-bar {
-      position: fixed; top: 0; left: 0; z-index: 9998;
+      position: fixed; top: 41px; left: 0; z-index: 9998;
       height: 3px; width: 0%;
       background: var(--grad-emerald);
       box-shadow: 0 0 12px rgba(16,185,129,0.5);
@@ -144,10 +145,11 @@
 
     /* ═══ ANNOUNCEMENT BAR ═══ */
     .ann-bar {
-      background: var(--grad-emerald); color: #000;
+      background: var(--grad-emerald); color: #ffffff;
       text-align: center; font-size: 13px; font-weight: 700;
       padding: 11px 20px; letter-spacing: 0.3px;
-      position: relative; overflow: hidden;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      overflow: hidden;
     }
     .ann-bar::before {
       content: ''; position: absolute; inset: 0;
@@ -157,42 +159,7 @@
     @keyframes ann-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
     .ann-bar span { opacity: 0.5; margin: 0 8px; }
     .ann-bar-text { position: relative; z-index: 1; }
-    .ann-countdown { font-weight: 900; color: #000; margin-left: 4px; }
-
-    /* ═══ NAV ═══ */
-    nav {
-      background: rgba(6,11,24,0.85); border-bottom: 1px solid var(--glass-border);
-      padding: 14px 28px; display: flex; align-items: center; justify-content: space-between;
-      position: sticky; top: 0; z-index: 100;
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    }
-    .nav-logo {
-      font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 900;
-      color: var(--emerald); letter-spacing: 1.5px; text-transform: uppercase;
-    }
-    .nav-right { display: flex; align-items: center; gap: 16px; }
-    .nav-counter {
-      font-size: 12px; font-weight: 700; color: var(--gold);
-      display: flex; align-items: center; gap: 6px;
-    }
-    .nav-counter .pulse-dot {
-      width: 8px; height: 8px; border-radius: 50%; background: var(--emerald);
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.3); }
-    }
-    .nav-cta {
-      background: var(--emerald); color: #000; font-weight: 800; font-size: 13px;
-      padding: 10px 24px; border-radius: 100px; letter-spacing: 0.2px;
-      transition: all 0.3s var(--ease-out);
-      box-shadow: 0 2px 12px rgba(16,185,129,0.2);
-    }
-    .nav-cta:hover {
-      background: var(--emerald-bright); transform: translateY(-1px);
-      box-shadow: 0 6px 24px rgba(16,185,129,0.35);
-    }
+    .ann-countdown { font-weight: 900; color: #ffffff; margin-left: 4px; }
 
     /* ═══ HERO ═══ */
     #hero {
@@ -1143,15 +1110,6 @@
   <span class="ann-bar-text">🔥 Limited Launch Price &nbsp;<span>|</span>&nbsp; <span class="cur-sym">₦</span><span class="cur-price">5,000</span> One-Time &nbsp;<span>|</span>&nbsp; Offer ends in <span class="ann-countdown" id="ann-cd">23:59:59</span></span>
 </div>
 
-<!-- ═══ NAV ═══ -->
-<nav>
-  <div class="nav-logo">Digitstem</div>
-  <div class="nav-right">
-    <div class="nav-counter"><div class="pulse-dot"></div> <span id="live-count">347</span> enrolled</div>
-    <a href="#pricing" class="nav-cta">Get Instant Access →</a>
-  </div>
-</nav>
-
 <!-- ═══ SOCIAL PROOF TOAST ═══ -->
 <div id="sp-toast">
   <div class="sp-avatar" id="sp-av">A</div>
@@ -1190,6 +1148,7 @@
         <div class="hero-badge"><span class="badge-icon">🌍</span> Works in 14 countries</div>
         <div class="hero-badge"><span class="badge-icon">📱</span> No ads. Just WhatsApp.</div>
         <div class="hero-badge"><span class="badge-icon">⚡</span> Instant digital access</div>
+        <div class="hero-badge"><span class="badge-icon">🔥</span> <span id="live-count">347</span> enrolled</div>
       </div>
     </div>
   </div>
