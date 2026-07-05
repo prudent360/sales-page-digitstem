@@ -157,8 +157,8 @@
       animation: ann-shimmer 3s ease-in-out infinite;
     }
     @keyframes ann-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-    .ann-bar span { opacity: 0.5; margin: 0 8px; }
-    .ann-bar-text { position: relative; z-index: 1; }
+    .ann-bar .ann-sep { opacity: 0.5; margin: 0 8px; }
+    .ann-bar-text { position: relative; z-index: 1; color: #ffffff; }
     .ann-countdown { font-weight: 900; color: #ffffff; margin-left: 4px; }
 
     /* ═══ HERO ═══ */
@@ -1107,7 +1107,7 @@
 
 <!-- ═══ ANNOUNCEMENT BAR ═══ -->
 <div class="ann-bar">
-  <span class="ann-bar-text">🔥 Limited Launch Price &nbsp;<span>|</span>&nbsp; <span class="cur-sym">₦</span><span class="cur-price">5,000</span> One-Time &nbsp;<span>|</span>&nbsp; Offer ends in <span class="ann-countdown" id="ann-cd">23:59:59</span></span>
+  <span class="ann-bar-text">🔥 Limited Launch Price &nbsp;<span class="ann-sep">|</span>&nbsp; <span class="cur-sym">₦</span><span class="cur-price">5,000</span> One-Time &nbsp;<span class="ann-sep">|</span>&nbsp; Offer ends in <span class="ann-countdown" id="ann-cd">23:59:59</span></span>
 </div>
 
 <!-- ═══ SOCIAL PROOF TOAST ═══ -->
